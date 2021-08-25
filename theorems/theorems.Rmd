@@ -3,17 +3,17 @@ title: "Theorems & Definitions"
 author: "Akiko Iwamizu"
 date: "8/25/2021"
 output:
-  bookdown::html_document2: default
   bookdown::pdf_document2:
-    keep_tex: true
     toc: true
-  bookdown::word_document2:
-    toc: true
+  bookdown::html_document2: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-#install.packages("bookdown")
+```
+
+```{r, include=FALSE}
+options(tinytex.verbose = TRUE)
 ```
 
 # Probability
@@ -24,107 +24,143 @@ A set $S$ of subsets of $\Omega$ is an _event space_ if it satisfies the followi
 * *Nonempty*: $S$ $\ne$ $\emptyset$.
 * *Closed under complements*: if $A$ $\in$ $S$, then $A^c$ $\in$ $S$.
 * *Closed under countable unions*: if $A_1$, $A_2$, $A_3$,... $\in$ $S$, then $A_1$ $\cup$ $A_2$ $\cup$ $A_3$ $\cup$ ... $\in$ $S$.
+
+&nbsp;
+
 :::
 
 ::: {.definition name="Kolmogorov Axioms"}
 Let $\Omega$ be a _sample space_, $S$ be an _event space_, and $P$ be a _probability measure_. Then ($\Omega$,$S$,$P$) is a _probability space_ if it satifies the following:
 
-* *Non-negativity*: $\forall$$A$ $\in$ $S$, $P(A) ≥ 0$ where $P(A)$ is finite and real.
+* *Non-negativity*: $\forall$$A$ $\in$ $S$, $P(A) \ge 0$ where $P(A)$ is finite and real.
 * *Unitary*: $P(\Omega) = 1$.
 * *Countable additivity*: if $A_1$, $A_2$, $A_3$,... $\in$ $S$ are pairwise disjoint, then
 $$P(A_1 \cup A_2 \cup A_3 \cup ...) = P(A_1) + P(A_2) + P(A_3) +... = \sum P(A_i).$$
 
 The intuition behind these axioms is as follow: The first axiom states that the probability of any event is a non-negative number; there cannot be a less-than-zero chance of an event occuring. The second axiom states that the probability measure of the entire sample space is one. In other words, it is certain that some outcome will occur. Finally, the third axiom states that, given any number of _mutually exclusive events_, the probaility that one of those events will occur is the sum of their individual probabilities.
+
+&nbsp;
+
 :::
 
 ::: {.definition name="Pairwise Disjoint"}
-Recall that sets $A$ and $B$ are disjoint if $A \cap B = \emptyset$. We say that $A_1$, $A_2$, $A_3$,... are pairwise disjoint if each of them is disjoint from every other, that is, $\forall i \ne j, A_i \cap A_j = \emptyset$. 
+Recall that sets $A$ and $B$ are disjoint if $A \cap B = \emptyset$. We say that $A_1$, $A_2$, $A_3$,... are pairwise disjoint if each of them is disjoint from every other, that is, $\forall i \ne j, A_i \cap A_j = \emptyset$.
+
+&nbsp;
+
 :::
 
 ::: {.theorem name="Basic Properties of Probability"}
 Let ($\Omega$,$S$,$P$) be a probability space. Then
 
-* *Monotonicity*: $\forall A, B \in S$, if $A \subseteq B$, then $P(A) ≤ P(B)$.
-  * _Monotonicity_ implies that, if one event is a subset of another (so that the former always occurs whenever the latter does), then the probability of the former occurring is no greather than that of the latter. 
+* *Monotonicity*: $\forall A, B \in S$, if $A \subseteq B$, then $P(A) \le P(B)$.
+  * Monotonicity implies that, if one event is a subset of another (so that the former always occurs whenever the latter does), then the probability of the former occurring is no greather than that of the latter. 
 * *Subtraction rule*: $\forall A, B \in S$, if $A \subseteq B$, then $P(B \setminus A) = P(B) - P(A)$.
-  * The _subtraction rule_ implies that the probability that the second event occurs but not the first is equal to the probability of the second event minus the probability of the first event. 
+  * The subtraction rule implies that the probability that the second event occurs but not the first is equal to the probability of the second event minus the probability of the first event. 
 * *Zero probability of the empty set*: $P(\emptyset) = 0$.
-  * _Zero probability of the empty set_ means that some event in our event space must occur, and probability bounds mean that each of these events has some probability of occuring between zero and one. 
-* *Probability bounds*: $\forall A \in S$, $0 ≤ P(A) ≤ 1$.
-  * _Monotonicity_ and _unitarity_ (and _non-negativity_) imply the probability bounds since $A \subseteq \Omega$.
+  * Zero probability of the empty set means that some event in our event space must occur, and probability bounds mean that each of these events has some probability of occuring between zero and one. 
+* *Probability bounds*: $\forall A \in S$, $0 \le P(A) \le 1$.
+  * Monotonicity and unitarity (and non-negativity) imply the probability bounds since $A \subseteq \Omega$.
 * *Complement rule*: $\forall A \in S$, $P(A^c) = 1 - P(A)$.
-  * The _complement rule_ implies that the probability of any of these events not occurring is one minus the probability of the event occurring - so that the probability that a given event either occurs or does not occur is one.
+  * The complement rule implies that the probability of any of these events not occurring is one minus the probability of the event occurring - so that the probability that a given event either occurs or does not occur is one.
+
+&nbsp;
+
 :::
 
 ::: {.definition name="Joint Probability"}
 For $A, B \in S$, the _joint probability_ of $A$ and $B$ is $P(A \cap B)$.
 
 In other words, the joint probability of two events $A$ and $B$ is the probability of the intersection of $A$ and $B$ (which is itself an event in $S$), that is, the set of all states of the world in which both $A$ and $B$ occur.
+
+&nbsp;
+
 :::
 
 ::: {.theorem name="Addition Rule"}
 For $A, B \in S$, 
-
 $$P(A \cup B) = P(A) + P(B) - P(A \cap B).$$
-In other words, the probability of at least one of two events occurring is equal to the sum of the probabilities of each occurring minus the probability of both occurring. Of course, if A and B are disjoint, this reduces to $P(A \cup B) = P(A) + P(B)$, which is just a _special case of countable additivity_.
+
+&nbsp;
+
 :::
 
 ::: {.definition name="Conditional Probability"}
 For $A, B \in S$ with $P(B) > 0$, the _conditional probability_ of $A$ given $B$ is
-
 $$P(A \mid B) = \frac {P(A \cap B)}{P(B)}.$$
+
+&nbsp;
+
 :::
 
 ::: {.theorem name="Multiplicative Law of Probability"}
 For $A, B \in S$ with $P(B) > 0$,
-
 $$P(A \mid B)P(B) = P(A \cap B).$$
 $$P(A \cap B) = P(B|A)P(A).$$
+
+&nbsp;
+
 :::
 
 ::: {.theorem name="Bayes' Rule"}
 For $A, B \in S$ with $P(A) > 0$ and $P(B) > 0$,
-
 $$P(A \mid B) = \frac {P(B \mid A)P(A)}{P(B)}.$$
+
+&nbsp;
+
 :::
 
-::: {.definition name="Partition Rule #1"}
+::: {.definition name="Partition Rule 1"}
 If $A_1$, $A_2$, $A_3$,... $\in$ $S$ are nonempty and pairwise disjoint, and $\Omega = A_1 \cup A_2 \cup A_3 \cup ...$, then {$A_1$, $A_2$, $A_3$,...} is a _partition_ of $\Omega$.
 
 $$A = A \cap (B \cup B^c) = (A \cap B) \cup (A \cap B^c) = (A \cap B) \cup (A \setminus B).$$
+
+&nbsp;
+
 :::
 
-::: {.definition name="Partition Rule #2"}
+::: {.definition name="Partition Rule 2"}
 If $A_1$, $A_2$, $A_3$,... $\in$ $S$ are nonempty and pairwise disjoint, and $\Omega = A_1 \cup A_2 \cup A_3 \cup ...$, then {$A_1$, $A_2$, $A_3$,...} is a _partition_ of $\Omega$.
-
 $$A \cup B = [(A \setminus B) \cup (A \cap B)] \cup [(A \cap B) \cup (B \setminus A)] = (A \setminus B) \cup (A \cap B) \cup (B \setminus A).$$
+
+&nbsp;
+
 :::
 
 ::: {.theorem name="Law of Total Probability"}
 If {$A_1$, $A_2$, $A_3$,...} is a _partition_ of $\Omega$ and $B \in S$, then
-
 $$P(B) = \sum P(B \cap A_i).$$
 
 If we also have $P(A_i) > 0$ for $i$ = 1,2,3,..., then this can also be stated as
-
 $$P(B) = \sum P(B \mid A_i)P(A_i).$$
 
-The probability of an event $B$ is effectively a weighted average of the conditional probabilities of that event $B$, where the weights are determined by the probabilities of the events that are being condition on ($A_1$, $A_2$, $A_3$,...).
+&nbsp;
+
 :::
 
 ::: {.theorem name="Alternative Forms of Bayes' Rule"}
 If {$A_1$, $A_2$, $A_3$,...} is a _partition_ of $\Omega$ with $P(A_i) > 0$ for $i$ = 1,2,3,..., and $B \in S$, then apply the Law of Total Probability to the denominator to get
 
 $$P(A_j \mid B) = \frac {P(B \mid A_j)P(A_j)}{\sum P(B \cap A_i)}.$$
-
 $$P(A_j \mid B) = \frac {P(B \mid A_j)P(A_j)}{\sum P(B \mid A_i)P(A_i)}.$$
 $$P(A \mid B) = \frac {P(B \mid A)P(A)}{P(B \mid A)P(A) + P(B \mid A^c)P(A^c)}.$$
+
+&nbsp;
+
 :::
 
 ::: {.definition name="Independence of Events"}
-Events $A,B \in S$ are _independent_ if $P(A \cap B) = P(A)P(B).$
+Events $A,B \in S$ are _independent_ if 
+$$P(A \cap B) = P(A)P(B).$$
+
+&nbsp;
+
 :::
 
 ::: {.theorem name="Conditional Probability and Independence"}
-For $A,B \in S$ with $P(B) > 0$, $A$ and $B$ are _independent_ if and only if $P(A \mid B) = P(A).$
+For $A,B \in S$ with $P(B) > 0$, $A$ and $B$ are independent if and only if 
+$$P(A \mid B) = P(A).$$
+
+&nbsp;
+
 :::
