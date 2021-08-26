@@ -3,9 +3,9 @@ title: "Theorems & Definitions"
 author: "Akiko Iwamizu"
 date: "8/25/2021"
 output:
+  bookdown::html_document2: default
   bookdown::pdf_document2:
     toc: true
-  bookdown::html_document2: default
 ---
 
 ```{r setup, include=FALSE}
