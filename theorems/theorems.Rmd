@@ -3,9 +3,9 @@ title: "Theorems & Definitions"
 author: "Akiko Iwamizu"
 date: "8/25/2021"
 output:
-  bookdown::html_document2: default
   bookdown::pdf_document2:
     toc: true
+  bookdown::html_document2: default
 ---
 
 ```{r setup, include=FALSE}
@@ -37,7 +37,7 @@ Let $\Omega$ be a _sample space_, $S$ be an _event space_, and $P$ be a _probabi
 * *Countable additivity*: if $A_1$, $A_2$, $A_3$,... $\in$ $S$ are pairwise disjoint, then
 $$P(A_1 \cup A_2 \cup A_3 \cup ...) = P(A_1) + P(A_2) + P(A_3) +... = \sum P(A_i).$$
 
-The intuition behind these axioms is as follow: The first axiom states that the probability of any event is a non-negative number; there cannot be a less-than-zero chance of an event occuring. The second axiom states that the probability measure of the entire sample space is one. In other words, it is certain that some outcome will occur. Finally, the third axiom states that, given any number of _mutually exclusive events_, the probaility that one of those events will occur is the sum of their individual probabilities.
+The intuition behind these axioms is as follow: The first axiom states that the probability of any event is a non-negative number; there cannot be a less-than-zero chance of an event occuring. The second axiom states that the probability measure of the entire sample space is one. In other words, it is certain that some outcome will occur. Finally, the third axiom states that, given any number of _mutually exclusive events_, the probability that one of those events will occur is the sum of their individual probabilities.
 
 &nbsp;
 
