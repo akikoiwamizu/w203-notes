@@ -1,11 +1,11 @@
 ---
 title: "Theorems & Definitions"
 author: "Akiko Iwamizu"
-date: "8/25/2021"
+date: "8/31/2021"
 output:
+  bookdown::html_document2: default
   bookdown::pdf_document2:
     toc: true
-  bookdown::html_document2: default
 ---
 
 ```{r setup, include=FALSE}
@@ -163,4 +163,95 @@ $$P(A \mid B) = P(A).$$
 
 &nbsp;
 
+:::
+
+
+# Random Variables
+
+::: {.definition name="Random Variable"}
+A _random variable_ is a function $X: \Omega \to \mathbb{R}$ such that 
+
+$$\forall r \in \mathbb{R}, \{\omega \in \Omega: X(\omega) \leq r \} \in S.$$ 
+
+Where each $\omega \in \Omega$ denotes a state of the world, which may be represented by anything: numbers, letters, words, etc. to describe all the distinct possible outcomes that could occur. A _random variable_ maps each of these states of the world to a real number. Thus, it is often remarked that, a _random variable_ is neither random nor a variable, as it is merely a _function_. So when the state of the world is $\omega$, the random variable takes on the value $X(\omega)$. For example, the event $\{X = 1\}$ should be understood to mean the set of states $\{\omega \in \Omega: X(\omega) = 1\}$.
+:::
+
+::: {.definition name="Function of a Random Variable"}
+Let $g: U \to \mathbb{R}$ be a function, where $X(\Omega) \subseteq U \subseteq \mathbb{R}$. Then, if $g \circ X: \Omega \to \mathbb{R}$ is a random variable, we say that $g$ is a _function of X_, and write $g(X)$ to denote the randome variable $g \circ X$. This general definition allows us to formally work with transformations of random variables as random variables in their own right. 
+:::
+
+::: {.definition name="Operator on a Random Variable"}
+An _operator_ $A$ on a random variable maps the function $X(\cdot)$ to a real number, denoted by $A[X]$.
+:::
+
+::: {.example name="Example of a Random Variable"}
+We can define events in $S$ in terms of a random variable $X$. For example we could let
+
+* $A = \{\omega \in \Omega: X(\omega) = 1\} = \{X = 1\}.$
+* $B = \{\omega \in \Omega: X(\omega) \geq 0\} = \{X \geq 0\}.$
+* $C = \{\omega \in \Omega: X(\omega)^2 \le 10, X(\omega) \neq 3\} = \{X(\omega)^2 \le 10, X(\omega) \neq 3\}.$
+* $PR[X = 1] = P(A).$
+* $PR[X \geq 0] = P(B).$
+* $PR[X(\omega)^2 \le 10, X(\omega) \neq 3] = P(C).$
+:::
+
+::: {.definition name="Discrete Random Variable"}
+A random variable $X$ is _discrete_ if its range, $X(\Omega)$, is a countable set. In other words, a _discrete random variable_ is a random variable that can only take on a finite or countably infinite number of different values.
+:::
+
+::: {.definition name="Probability Mass Function (PMF)"}
+For a discrete random variable $X$, the _probability mass function_ of $X$ is:
+
+$$f(x) = Pr[X = x], \forall x \in \mathbb{R}.$$
+:::
+
+::: {.example name="A Fair Die Roll"}
+We can apply the definition of _PMF_ to our familiar die roll example. Consider a roll of one fair (six-sided) die. Let $X$ take on the value of the outcome of the die roll; that is, let $\Omega = \{1,2,3,4,5,6\}$ and $X(\omega) = \omega, \forall \omega \in \Omega$. Then $Pr[X = 1] = Pr[X = 2] = ... = Pr[X = 6] = \frac{1}{6}$. Out of many die rolls, we expect each of the values 1 through 6 to come up one sixth of the time. Thus, the _PMF_ of $X$ is:
+
+$$f(x) = \begin{cases} \frac{1}{6} & : x \in \{1,2,3,4,5,6\} \\ 0 & : otherwise. \end{cases}$$
+:::
+
+::: {.example name="A Biased Coin Flip (Bernoulli Distribution)"}
+We can also highlight a generalization of our coin flip example: a biased coin flip where the resuling random variable is known as a _Bernoulli_ random variable. Consider a coin flip with a (potentially) biased coin - that is, a coin that comes up tails with some unknown probability. Let $X = 0$ if the coin comes up heads and $X = 1$ if the coin comes up tails; that is, let $\Omega = \{H,T\}$ and let $X(H) = 0$ and $X(T) = 1$. Let $p$ be the probability that the coin comes up tails: $Pr[X = 1] = p$ and let $Pr[X = 0] = 1 - Pr[X = 1] = 1 - p$. Out of many coin flips, we expect that the proportion of times the coin comes up tails will be $p$ and the proportion of the times the coin comes up heads will be $1 - p$. The random variable $X$ thus has a _PMF_ of:
+
+$$f(x) = \begin{cases} 1 - p & : x = 0 \\ p & : x = 1 \\ 0 & : otherwise. \end{cases}$$
+:::
+
+::: {.example name="Flipping a Biased Coin Until It Comes Up Tails (Geometric Distribution)"}
+This example illustrates how a discrete random variable can have a countably infinite number of possible values. Suppose we flipped a (potentially) biased coin repeatedly until the first time it came up tails. Let $p$ be the probability that the coin comes up tails, and assume $0 < p < 1$. Let $X$ be the number of flips it takes to get tails. For any given positive integer $x$, getting the first tails on exactly the $x^{th}$ flip requires getting heads on each of the first $x - 1$ flips and then tails on the $x^{th}$ flip. The probability of this happening is $(1 - p)^{x - 1}p$, or the product of the probabilities of the desired outcome on each flip (since the flips are independent). So the _PMF_ of $X$ is:
+
+$$f(x) = \begin{cases} (1 - p)^{x - 1}p & : x \in \mathbb{N} \\ 0 & : otherwise. \end{cases}$$
+For example, if it is a fair coin (that is, $p = 1 - p = \frac{1}{2}$) then $\forall x \in \mathbb{N}, Pr[X = x] = (\frac{1}{2})^{x}$; the first tails will be obtained on the first flip with probability $\frac{1}{2}$, on the second flip with probability $\frac{1}{4}$, on the third flip with probability $\frac{1}{8}$, and so on. Thus, $X$ can take on _any_ positive integer value, albeit with vanishingly small probability for large values.
+:::
+
+::: {.example name="PMF & the Distribution of Discrete Random Variables"}
+For a discrete random variable $X$, the _PMF_ tells us everything about its _distribution_, which is loosely defined as the collection of probabilities assigned to events that can be defined just in terms of $X$. To illustrate how the _PMF_ can fully describe a discrete random variable, consider a random variable $X$ such that $f(x) = 0,  \forall x \notin \mathbb{Z}$ (that is, $X$ takes on only integer values). Then:
+
+* $Pr[X \geq 3] = \sum_{x=3}^{\infty}f(x).$
+* $Pr[X \geq 3 or X = 1] = f(1) + \sum_{x=3}^{\infty}f(x).$
+* $Pr[X < 4] = \sum_{x=1}^{3}f(x).$
+
+For example, for a fair (six-sided) die roll:
+
+* $Pr[X \geq 3] = \sum_{x=3}^{6}f(x) = \frac{4}{6} = \frac{2}{3}.$
+* $Pr[X \geq 3 or X = 1] = f(1) + \sum_{x=3}^{6}f(x) = \frac{1}{6} + \frac{4}{6} = \frac{5}{6}.$
+* $Pr[X < 4] = \sum_{x=1}^{3}f(x) = \frac{3}{6} = \frac{1}{2}.$
+:::
+
+
+::: {.theorem name="Properties of PMFs"}
+For a discrete random variable $X$ with _PMF_ $f$:
+
+* $\forall x \in \mathbb{R}, f(x) \geq 0.$
+* $\sum_{x \in X(\Omega)}f(x) = 1.$
+
+The proof of this theorem follows directly from the _Kolmogorov axioms_.  
+:::
+
+::: {.theorem name="Event Probabilities for Discrete Random Variables"}
+More generally, this theorem gives the formula for using the _PMF_ to compute the probability of _any_ event defined in terms of a discrete random variable $X$. For a discrete random variable $X$ with _PMF_ $f$, if $D \subseteq \mathbb{R}$ and $A = \{X \in D\}$, then:
+
+$$P(A) = Pr[X \in D] = \sum_{x \in X(A)}f(x).$$
+
+The proof of this theorem follows directly from the _Kolmogorov axioms_. Note that any condiiton on $X$ can be expressed as $X \in D$ for some set $D \subseteq \mathbb{R}$, so this theorem allows us to compute the probability of any event defined in terms of a discrete random variable $X$.
 :::
