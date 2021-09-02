@@ -1,7 +1,7 @@
 ---
 title: "Theorems & Definitions"
 author: "Akiko Iwamizu"
-date: "8/31/2021"
+date: "9/2/2021"
 output:
   bookdown::html_document2: default
   bookdown::pdf_document2:
@@ -248,10 +248,280 @@ For a discrete random variable $X$ with _PMF_ $f$:
 The proof of this theorem follows directly from the _Kolmogorov axioms_.  
 :::
 
+
 ::: {.theorem name="Event Probabilities for Discrete Random Variables"}
 More generally, this theorem gives the formula for using the _PMF_ to compute the probability of _any_ event defined in terms of a discrete random variable $X$. For a discrete random variable $X$ with _PMF_ $f$, if $D \subseteq \mathbb{R}$ and $A = \{X \in D\}$, then:
 
 $$P(A) = Pr[X \in D] = \sum_{x \in X(A)}f(x).$$
 
 The proof of this theorem follows directly from the _Kolmogorov axioms_. Note that any condiiton on $X$ can be expressed as $X \in D$ for some set $D \subseteq \mathbb{R}$, so this theorem allows us to compute the probability of any event defined in terms of a discrete random variable $X$.
+:::
+
+::: {.definition name="Cumulative Distribution Function (CDF)"}
+For a random variable $X$, the _cumulative distribution function_ of $X$ is:
+
+$$F(x) = Pr[X \leq x], \forall x \in \mathbb{R}.$$
+The CDF returns the probability that an outcome for a random variable will be less than or equal to a given value. Importantly, given any random variable, the CDF tells us everything there is to know about its behavior. For any event that can be described in terms of a random variable, we can derive the event's probability from the CDF of the random variable alone.
+:::
+
+
+::: {.theorem name="Properties of CDFs"}
+The following important properties of CDFs follow immediately from the axioms and basic properties of probability. For a random variable $X$ with CDF $F$,
+
+* $F$ is nondecreasing: $\forall x_1, x_2 \in \mathbb{R}$, if $x_1 < x_2$, then $F(x_1) \leq F(x_2)$.
+* $\lim_{x \to -\infty} F(x) = 0$.
+* $\lim_{x \to \infty} F(x) = 1$.
+* $\forall x \in \mathbb{R}, 1-F(x) = Pr[X > x]$.
+:::
+
+
+::: {.example name="CDF of a Fair Die Roll"}
+For discrete random variables such as a die roll, the CDF is necessarily a step function, that is, a function that is flat everywhere except where it "jumps" from one value to another as the CDF increases by \frac{1}{6} at each value in {1,2,3,4,5,6}. We can evaluate the CDF at any real value, for example,
+
+* $F(-1) = 0$.
+* $F(1) = \frac{1}{6}$.
+* $F(1.5) = \frac{1}{6}$.
+* $F(2) = \frac{2}{6} = \frac{1}{3}$.
+* $F(6) = 1$.
+* $F(7) = 1$.
+* $F(24,603) = 1$.
+
+Note that, in this example, the value of the CDF for any $x$ greater than or equal to 6 will be 1; since any outcome we get is guaranteed to be less than or equal to 6, or 7, or 24,603. Additionally, we can use the CDF to compute probabilities:
+
+* $Pr[X < 2] = Pr[X \leq 1] = F(1) = \frac{1}{6}$,
+* $Pr[X \geq 3] = 1- Pr[X < 3] = 1- Pr[X \leq 2] = 1 - F(2) = 1 - \frac{2}{6} = \frac{4}{6} = \frac{2}{3}$,
+* $Pr[2 \leq X \leq 4] = Pr[X \leq 4] - Pr[X < 2] = F(4) - F(1) = \frac{4}{6} - \frac{1}{6} = \frac{3}{6} = \frac{1}{2}$,
+
+where the second line applies the _Complement Rule_ and the third applies the _Subtraction Rule_.
+:::
+
+
+::: {.definition name="Continuous Random Variable"}
+A random variable $X$ is _continuous_ if there exists a non-negative function $f: \mathbb{R} \to \mathbb{R}$ such that the CDF of $X$ is:
+
+$$F(X) = Pr[X \leq x] = \int_{-\infty}^x f(u)du, \forall x \in \mathbb{R}.$$
+:::
+
+
+::: {.definition name="Probability Density Function (PDF)"}
+The function $f$ is called the _probability density function (PDF)_. The Fundamental Theorem of Calculus implies that, for any continuous random variable, the PDF is unique and defined as below. For a continuous random variable $X$ with CDF $F$, the _probability density function_ of $X$ is:
+
+$$f(x) = \left.\frac{dF(u)}{du} \right\vert_{u=x}, \forall x \in \mathbb{R}.$$
+Conceptually, the PDF is the continuous analog to the PMF in that it describes how the CDF changes with $x$. The difference is that, whereas PMF specifies the size of the "jump" in the CDF at a point $x$, a PDF gives the instantaneous slope (derivative) of the CDF at a point $x$. That is, for a very small number of $\epsilon > 0$, if we moved from $x$ to $x + \epsilon$, the CDF would change by appox $\epsilon f(x)$.
+:::
+
+
+::: {.theorem name="Properties of PDFs"}
+For a continuous random variable $X$ with PDF $f$,
+
+* $\forall x \in \mathbb{R}, f(x) \geq 0$.
+* $\int_{-\infty}^{\infty} f(x)dx = 1$.
+:::
+
+
+::: {.theorem name="Properties of PDFs"}
+This theorem establishes that we can express any event of the form $\{X \in I\}$, where $I$ is an interval in \mathbb{R}, in terms of integrals of the PDF. For a continuous random variable $X$ with PDF $f$,
+
+* $\forall x \in \mathbb{R}, Pr[X = x] = 0$.
+* $\forall x \in \mathbb{R}, Pr[X < x] = Pr[X \leq x] = F(x) = \int_{-\infty}^{x} f(u)du$.
+* $\forall x \in \mathbb{R}, Pr[X > x] = Pr[X \geq x] = 1 - F(x) = \int_{x}^{\infty} f(u)du$.
+* $\forall a,b \in \mathbb{R}$ with $a \leq b$,
+
+$$\begin{align} Pr[a < X < b] &= Pr[a \leq X < b] \\ &= Pr[a < X \leq b] \\ &= Pr[a \leq X \leq b] \\ &= F(b) - F(a) \\ &= \int_a^b f(x)dx. \end{align}$$
+:::
+
+
+::: {.example name="Standard Uniform Distribution"}
+Consider the standard uniform distribution, denoted by $U(0,1)$. Informally, if a random variable $X$ follows the standard uniform distribution, $X$ takes on a random real value from the internal [0,1], with all values in this interval equally likely to occur. We write $X \thicksim U(0,1)$ to denote that $X$ follows the standard uniform distribution. 
+
+The PDF of $U(0,1)$ is:
+
+$$f(x) = \begin{cases} 1 & : 0 \leq x \leq 1 \\ 0 & : otherwise.  \end{cases}$$
+
+The CDF of $U(0,1) is$:
+
+$$F(x) = Pr[X \leq x] = \int_{-\infty}^x f(u)du = \begin{cases} 0 & : x < 0 \\ x & : 0 \leq x \leq 1 \\ 1 & : x > 1.  \end{cases}$$
+:::
+
+
+::: {.example name="Standard Normal Distribution"}
+You may be familiar with the standard normal (or Gaussian) distribution. The standard normal distribution is denoted by $N(0,1)$.
+
+The PDF of $N(0,1)$ is:
+
+$$\phi(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}.$$
+
+The CDF of $N(0,1) is$:
+
+$$\Phi(x) = \int_{-\infty}^x \frac{1}{\sqrt{2\pi}}e^{-\frac{u^2}{2}}du.$$
+:::
+
+
+::: {.definition name="Support"}
+For a random variable $X$ with PMF/PDF $f$, the _support_ of $X$ is:
+
+$$Supp[X] = \{x \in \mathbb{R} : f(x) > 0\}.$$
+
+* When the random variable $X$ is _discrete_, $Supp[X]$ is the set of values that $X$ takes on with nonzero probability. For example, if $X$ is the outcome of a die roll, then $Supp[X] = \{1,2,3,4,5,6\}$. 
+* When the random variable $X$ is _continuous_, $Supp[X]$ is the set of values over which $X$ has a nonzero probability density. For example, if $X \thicksim U(0,1)$, then $Supp[X] = [0,1] = \{x \in \mathbb{R} : 0 \leq x \leq 1\}$. 
+:::
+
+
+::: {.definition name="Equality of Random Variables"}
+When we say two random variables are equal, we mean that they are equal as _functions_; they assign the same value to every state of the world. Let $X$ and $Y$ be random variables. Then $X = Y$ if, $\forall \omega \in \Omega, X(\omega) = Y(\omega)$.
+:::
+
+
+::: {.definition name="Equality of Functions of a Random Variable"}
+From the definition above, it follows that two functions of a random variable, $g(X)$ and $h(X)$ are equal as random variables if and only if they are equal as functions on $X(\Omega)$. Let $X$ be a random variable and let $f$ and $g$ be functions of $X$. Then
+
+$$g(X) = h(X) \iff \forall x \in X(\Omega), g(x) = h(x).$$
+
+_Proof_:
+
+* Suppose that $\forall x \in X(\Omega), g(x) = h(x)$. 
+* Let $\omega \in \Omega$. 
+* Then $X(\omega) \in X(\Omega)$, so $g(X(\omega)) = h(X(\omega))$. 
+* Thus, $\forall \omega \in \Omega, g(X(\omega)) = h(X(\omega))$, so $g(X) = h(X)$.
+
+* Now suppose that $g(X) = h(X)$, so $\forall \omega \in \Omega, g(X(\omega)) = h(X(\omega))$. 
+* Let $x \in X(\Omega)$.
+* Then $\exists \omega \in \Omega$ such that $X(\omega) = x$, so $g(x) = h(x)$.
+* Thus, $\forall x \in X(\Omega), g(x) = h(x).$
+
+:::
+
+
+::: {.definition name="Joint PMF"}
+For discrete random variables $X$ and $Y$, the _joint PMF_ of $X$ and $Y$ is
+
+$$f(x,y) = Pr[X=x, Y=y], \forall x,y \in \mathbb{R}.$$
+:::
+
+
+::: {.definition name="Joint CDF"}
+For random variables $X$ and $Y$, the _joint CDF_ of $X$ and $Y$ is
+
+$$F(x,y) = Pr[X \leq x, Y \leq y], \forall x,y \in \mathbb{R}.$$
+:::
+
+
+::: {.example name="Flipping a Coin and Rolling a Die"}
+Consider the generative process in which the experimenter flips a coin and then rolls either a four-sided or six-sided die depending on the outcome of the coin flip. Let $X = 0$ if the coin comes up heads and $X = 1$ if the coin comes up tails, and let Y be the value of the outcome of the die roll. Then the _joint PMF_ of $X$ and $Y$ is
+
+$$f(x,y) = \begin{cases} \frac{1}{8} &: x = 0, y \in \{1,2,3,4\} \\ \frac{1}{12} &: x = 1, y \in \{1,2,3,4,5,6\} \\ 0 &: otherwise. \end{cases}$$
+
+For discrete random variables, the _joint CDF_ is constructed by summing over the appropriate values of $X$ and $Y$. For example,
+
+$$\begin{align}F(1,3) &=\sum_{x \leq 1}\sum_{y \leq 3} f(x,y) \\ &= f(0,1) + f(0,2) + f(0,3) + f(1,1) + f(1,2) + f(1,3) \\ &= \frac{1}{8} + \frac{1}{8} + \frac{1}{8} + \frac{1}{12} + \frac{1}{12} + \frac{1}{12} \\ &= \frac{5}{8}. \end{align}$$
+:::
+
+
+::: {.theorem name="Marginal PMF"}
+For discrete random variables $X$ and $Y$ with joint PMF $f$, the _marginal PMF_ of $Y$ is
+
+$$f_Y(y) = Pr[Y = y] = \sum_{x \in Supp[X]}f(x,y), \forall y \in \mathbb{R}.$$
+The proof for this theorem follows directly from the _Law of Total Probability_ where we sum the joint probabilities of $X = x$ and $Y = y$ for every possible outcome for $X$ to get the overall probability that $Y = y$. We can also compute the marginal PMF of $X$ analogously.
+:::
+
+
+::: {.definition name="Conditional PMF"}
+For discrete random variables $X$ and $Y$ with joint PMF $f$, the _conditional PMF_ of $Y$ given $X = x$ is
+
+$$f_{Y|x}(y|x) = Pr[Y = y | X = x] = \frac{Pr[X = x, Y = y]}{P[X = x]} = \frac{f(x,y)}{f_X(x)},$$
+$\forall y \in \mathbb{R}$ and $\forall x \in Supp[X]$.
+
+Since $\forall x \in Supp[X]$ is equivalent to $f_X(x) > 0$, this domain condition ensures that the denominator is nonzero. The conditional PMF of $X$ given $Y$ is defined analogously.
+:::
+
+
+::: {.example name="Flipping a Coin and Rolling a Die"}
+In the coin flip and die roll example, the _marginal PMFs_ are
+
+$$f_X(x) = \begin{cases} \frac{1}{2} &: x = 0 \\ \frac{1}{2} &: x = 1 \\ 0 &: otherwise. \end{cases}$$
+
+and
+
+$$f_Y(y) = \begin{cases} \frac{5}{24} &: y \in \{1,2,3,4\} \\ \frac{1}{12} &: y \in \{5,6\} \\ 0 &: otherwise. \end{cases}$$
+
+and the _conditional PMFs_ are
+
+$$f_{X|Y}(x|y) = \begin{cases} \frac{3}{5} &: x = 0, y \in \{1,2,3,4\} \\ \frac{2}{5} &: x = 1, y \in \{1,2,3,4\} \\ 1 &: x = 1, y \in \{5,6\} \\ 0 &: otherwise. \end{cases}$$
+and
+
+$$f_{Y|X}(y|x) = \begin{cases} \frac{1}{4} &: x = 0, y \in \{1,2,3,4\} \\ \frac{1}{6} &: x = 1, y \in \{1,2,3,4,5,6\} \\ 0 &: otherwise. \end{cases}$$
+
+Note that we can operate on _marginal PMFs_ in the same way that we would on _univariate PMFs_, since they are univariate PMFs. Similarly, _conditional PMFS_ are _univariate PMFs_ given any fixed value for the conditioning variable. So, in this example, below is a _univariate PMF_:
+
+$$f_{X|Y}(x|y) = \begin{cases} \frac{3}{5} &: x = 0 \\ \frac{2}{5} &: x = 1 \\ 0 &: otherwise. \end{cases}$$
+:::
+
+
+::: {.theorem name="Multiplicate Law for PMFs"}
+We can arrange the definition of _Conditional PMF_ to obtain an analog to the _Multiplicate Law of Probability_ for PMFs. Let $X$ and $Y$ be two discrete random variables with join PMF $f$. Then, $\forall x \in \mathbb{R}$ and $\forall y \in Supp[Y]$,
+
+$$f_{X|Y}(x|y)f_Y(y) = f(x,y).$$
+:::
+
+
+::: {.definition name="Jointly Continuous Random Variables"}
+Two random variables $X$ and $Y$ are _jointly continuous_ if there exists a non-negative function $f:\mathbb{R}^2 \to \mathbb{R}$ such that the joint CDF of $X$ and $Y$ is:
+
+$$F(x,y) = Pr[X \leq x, Y \leq y] = \int_{-\infty}^x \int_{-\infty}^y f(u,v) dydu, \forall x,y \in \mathbb{R}.$$
+The function $f$ is called the _joint probability density function (joint PDF)_. Just as a single continuous random variable is characterized by a continuous CDF, two jointly continuous random variables are characterized by a continuous joint CDF. Additionally, just as taking the derivative of the CDF of a continuous random variable yields the PDF, taking the mixed second-order partial derivative of the joint CDF of two jointly continuous random variables yields the joint PDF.
+:::
+
+
+::: {.definition name="Joint PDF"}
+For jointly continuous random variables $X$ and $Y$ with joint CDF $F$, the _joint PDF_ of $X$ and $Y$ is:
+
+$$f(x,y) = \left.\frac{\delta^2F(u,v)}{\delta u \delta v} \right\vert_{u=x,v=y}, \forall x,y \in \mathbb{R}.$$
+
+More intuitively, as with univariate continuous distributions, event probabilities are computed by _integration_: $\forall a,b,c,d \in \mathbb{R}$ with $a \leq b$ and $c \leq d$,
+
+$$Pr[a \leq X \leq b, c \leq Y \leq d] = \int_a^b \int_c^d f(x,y) dydx.$$
+
+That is, the volume under the PDF over a region equals the probability that $X$ and $Y$ take on values such that $(X,Y)$ is a point in that region. Indeed, the probability of _any_ event can be computed by _integration_.
+:::
+
+
+::: {.theorem name="Marginal PDF"}
+We can now define marginal PDFs analogous to marginal PMFs. As in the discrete case, the _marginal PDF_ of $Y$ is just the PDF of $Y$, ignoring the existence of $X$. This theorem shows how a marginal PDF can be derived from a joint PDF. For jointly continuous random variables $X$ and $Y$ with joint PDF $f$, the _marginal PDF_ of $Y$ is:
+
+$$f_Y(y) = \int_{-\infty}^\infty f(x,y) dx, \forall y \in \mathbb{R}.$$
+The intuition is analogous to the discrete case: we use integration to "sum" the joint density of $X$ and $Y$ over all values of $x$ to get the overall density for $Y$ at a given $y$. The marginal PDF of $X$ is computed analogously.
+:::
+
+
+::: {.definition name="Conditional PDF"}
+By contrast, the _conditional PDF_ of $X$ given $Y$ is the PDF of $X$ _given that_ a certain value fo $Y$ occurs. For jointly continuous random variables $X$ and $Y$ with joint PDF $f$, the _conditional PDF_ of $Y$ given $X=x$ is:
+
+$$f_{Y|X}(y|x) = \frac{f(x,y)}{f_X(x)}, \forall y \in \mathbb{R}, \forall x \in Supp[X].$$
+Again, the domain condition $x \in Supp[X]$ ensures that the denominator is nonzero. The conditional PDF of $X$ given $Y=y$ is defined analogously. As in the discrete case, marginal PDFS are univariate PDFs, and conditional PDFs are univariate PDFs given any fixed value for the conditioning variable.
+:::
+
+
+::: {.theorem name="Multiplicate Law for PDFs"}
+Let $X$ and $Y$ by two jointly continuous random variables with joint PDF $f$. Then, $\forall x \in \mathbb{R}$ and $\forall y \in Supp[Y]$,
+
+$$f_{X|Y}(x|y)f_Y(y) = f(x,y), \forall y \in \mathbb{R}, \forall x \in Supp[X].$$
+:::
+
+
+::: {.definition name="Independence of Random Variables"}
+Let $X$ and $Y$ be either two discrete random variables with joint PMF $f$ or two jointly continuous random variables with joint PDF $f$. Then $X$ and $Y$ are _independent_ if, $\forall x,y \in \mathbb{R}$:
+
+$$f(x,y) = f_X(x)f_Y(y).$$
+We write $X \perp \!\!\! \perp Y$ to denote $X$ and $Y$ are independent.
+:::
+
+
+::: {.theorem name="Implications of Independence (Part 1)"}
+Let $X$ and $Y$ be either two discrete random variables with joint PMF $f$ or two jointly continuous random variables with joint PDF $f$. Then the following statements are equivalent (that is, each one implies all the others):
+
+* $X \perp \!\!\! \perp Y.$
+* $\forall x,y \in \mathbb{R}, f(x,y) = f_X(x)f_Y(y).$
+* $\forall x \in \mathbb{R}$ and $\forall y \in Supp[Y], f_{X|Y}(x|y) = f_X(x).$
+* $\forall D,E \subseteq \mathbb{R},$ the events $\{X \in D\}$ and $\{Y \in E\}$ are independent.
+* For all functions $g$ of $X$ and $h$ of $Y$, $g(X) \perp \!\!\! \perp h(Y).$
 :::
