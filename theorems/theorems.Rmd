@@ -1,7 +1,7 @@
 ---
 title: "Theorems & Definitions"
 author: "Akiko Iwamizu"
-date: "9/7/2021"
+date: "9/15/2021"
 output:
   bookdown::html_document2: default
   bookdown::pdf_document2:
@@ -428,7 +428,7 @@ The proof for this theorem follows directly from the _Law of Total Probability_ 
 ::: {.definition name="Conditional PMF"}
 For discrete random variables $X$ and $Y$ with joint PMF $f$, the _conditional PMF_ of $Y$ given $X = x$ is
 
-$$f_{Y|x}(y|x) = Pr[Y = y | X = x] = \frac{Pr[X = x, Y = y]}{P[X = x]} = \frac{f(x,y)}{f_X(x)},$$
+$$f_{Y|X}(y|x) = Pr[Y = y | X = x] = \frac{Pr[X = x, Y = y]}{P[X = x]} = \frac{f(x,y)}{f_X(x)},$$
 $\forall y \in \mathbb{R}$ and $\forall x \in Supp[X]$.
 
 Since $\forall x \in Supp[X]$ is equivalent to $f_X(x) > 0$, this domain condition ensures that the denominator is nonzero. The conditional PMF of $X$ given $Y$ is defined analogously.
@@ -895,4 +895,255 @@ If $X$ and $Y$ are independent random variables, then:
 * Covariance is zero: $Cov[X,Y] = 0.$
 * Correlation is zero: $\rho[X,Y] = 0.$
 * Variances are additive: $V[X + Y] = V[X] + V[Y].$
+:::
+
+
+::: {.definition name="Conditional Expectation"}
+For discrete random variables $X$ and $Y$ with joint PMF, $f$, the conditional expectation of $Y$ given $X=x$ is:
+
+$$E[Y|X=x] = \sum_y yf_{Y|X}, \forall x \in Supp[X].$$
+For jointly continuous random variables $X$ and $Y$ with joint PDF, $f$, the conditional expectation of $Y$ given $X=x$ is:
+
+$$E[Y|X=x] = \int_{-\infty}^{\infty}yf_{Y|X}dy, \forall x \in Supp[X].$$
+:::
+
+
+::: {.theorem name="Conditional Expectation of a Function of Random Variables"}
+For discrete random variables $X$ and $Y$ with joint PMF, $f$, if $h$ is a function of $X$ and $Y$, then the conditional expectation of $h(X,Y)$ given $X=x$ is:
+
+$$E[h(X,Y) | X=x] = \sum_yh(x,y)f_{Y|X}(y|x), \forall x \in Supp[X].$$
+For jointly continuous random variables $X$ and $Y$ with joint PDF, $f$, if $h$ is a function of $X$ and $Y$, then the conditional expectation of $h(X,Y)$ given $X=x$ is:
+
+$$E[h(X,Y) | X=x] = \int_{-\infty}^{\infty}h(x,y)f_{Y|X}(y|x)dy, \forall x \in Supp[X].$$
+:::
+
+
+::: {.definition name="Conditional Variance"}
+For random variables $X$ and $Y$, the conditional variance of $Y$ given $X=x$ is:
+
+$$V[Y | X=x] = E[(Y - E[Y | X=x])^2 | X=x], \forall x \in Supp[X].$$
+:::
+
+
+::: {.theorem name="Alternative Formula for Conditional Variance"}
+For random variables $X$ and $Y$, $\forall x \in Supp[X]$:
+
+$$V[Y | X=x] = E[Y^2 | X=x] - E[Y | X=x]^2.$$
+:::
+
+
+::: {.theorem name="Linearity of Conditional Expectations"}
+For random variables $X$ and $Y$, if $g$ and $h$ are functions of $X$, then $\forall x \in Supp[X]$:
+
+$$E[g(X)Y+h(X) | X=x] = g(x)E[Y | X=x] + h(x).$$
+:::
+
+
+::: {.proof name="Linearity of Conditional Expectations"}
+Let $X$ and $Y$ be either discrete random variables with joint PMF, $f$, or jointly continuous random variables with joint PDF, $f$, and let $g$ and $h$ be functions of $X$. 
+
+If $X$ and $Y$ are discrete, then $\forall x \in Supp[X]$:
+
+\begin{align}
+E[g(X)Y+h(X) | X=x] &= \sum_y (g(x)y + h(x)) \times f_{Y|X}(y|x) \\
+                    &= g(x) \sum_y yf_{Y|X}(y|x) + h(x) \sum_y f_{Y|X}(y|x) \\
+                    &= g(x)E[Y | X=x] + h(x)(1) \\
+                    &= g(x)E[Y | X=x] + h(x) \\
+                    &= g(X)E[Y|X] + h(X).
+\end{align}
+
+Likewise, if $X$ and $Y$ are jointly continuous, then $\forall x \in Supp[X]$:
+
+\begin{align}
+E[g(X)Y+h(X) | X=x] &= \int_{-\infty}^{\infty} (g(x)y + h(x)) \times f_{Y|X}(y|x) \\
+                    &= g(x) \int_{-\infty}^{\infty} yf_{Y|X}(y|x) + h(x) \int_{-\infty}^{\infty} f_{Y|X}(y|x) \\
+                    &= g(x)E[Y | X=x] + h(x)(1) \\
+                    &= g(x)E[Y | X=x] + h(x). \\
+                    &= g(X)E[Y|X] + h(X).
+\end{align}
+:::
+
+
+::: {.definition name="Conditional Expectation Function (CEF)"}
+For random variables $X$ and $Y$ with joint PMF/PDF, $f$, the conditional expectation function of $Y$ given $X=x$ is:
+
+$$G_Y(x) = E[Y | X=x], \forall x \in Supp[X].$$
+The CEF is a _univariate function_ that maps $x$ to $E[Y | X=x]$. For example, if $X$ is a Bernoulli random variable, then the CEF of $Y$ given $X$ is:
+
+$$G_Y(x) = E[Y | X=x] = \begin{cases} E[Y | X=0] &: x=0 \\ E[Y |X=1] &: x=1. \end{cases}$$
+$G_Y(X)$ is a function of the random variable $X$ and is therefore itself a random variable whose value depends on the value of $X$. That is, when $X$ takes on the value $x$, the random variable $G_Y(X)$ takes on the value $G_Y(x) = E[Y | X=x].$ We write $E[Y|X]$ to denote $G_Y(X)$ since $E[Y | X=X]$ would be confusing.
+:::
+
+
+::: {.definition name="Conditional Variance Function (CVF)"}
+For random variables $X$ and $Y$ with joint PMF/PDF, $f$, the conditional variance function of $Y$ given $X=x$ is:
+
+$$H_Y(x) = V[Y | X=x], \forall x \in Supp[X].$$
+:::
+
+
+::: {.example name="Flipping a Coin and Rolling a Die"}
+Consider again the generative process from previous examples where the conditional PMF of $Y$ given $X=x$ is:
+$$f_{Y|X}(y|x) = \begin{cases}\frac{1}{4} &: x=0, y \in \{1,2,3,4\} \\ \frac{1}{6} &: x=1, y \in \{1,2,3,4,5,6\} \\ 0 &: otherwise. \end{cases}$$
+
+Thus, the CEF of $Y$ given $X=x$ is:
+
+\begin{align}
+E[Y | X=x] &= \sum_y yf_{Y|X}(y|x) \\
+           &= \begin{cases} \sum_{y=1}^4 y \times \frac{1}{4} &: x=0 \\ 
+                            \sum_{y=1}^6 y \times \frac{1}{6} &: x=1
+                            \end{cases} \\
+           &= \begin{cases} \frac{5}{2} &: x=0 \\ 
+                            \frac{7}{2} &: x=1.
+                            \end{cases}
+\end{align}
+
+
+Likewise the conditional PMF of $X$ given $Y=y$ is:
+$$f_{X|Y}(x|y) = \begin{cases}\frac{3}{5} &: x=0, y \in \{1,2,3,4\} \\ \frac{2}{5} &: x=1, y \in \{1,2,3,4\} \\ 1 &: x=1, y \in \{5,6\} \\ 0 &: otherwise. \end{cases}$$
+So the CEF of $X$ given $Y=y$ is:
+
+\begin{align}
+E[X | Y=y] &= \sum_x xf_{X|Y}(x|y) \\
+           &= \begin{cases} 0 \times \frac{3}{5} + 1 \times \frac{2}{5} &: y \in \{1,2,3,4\} \\ 
+                            0 \times 1 + 1 \times 1 &: y \in \{5,6\}
+                            \end{cases} \\
+           &= \begin{cases} \frac{2}{5} &:  y \in \{1,2,3,4\} \\ 
+                            1 &: y \in \{5,6\}. 
+                            \end{cases}
+\end{align}
+
+:::
+
+
+::: {.theorem name="Law of Iterated Expectations"}
+For random variables $X$ and $Y$,
+
+$$E[Y] = E[E[Y|X]].$$
+:::
+
+
+::: {.proof name="Law of Iterated Expectations"}
+Let $X$ and $Y$ be either two discrete random variables with joint PMF, $f$, or two jointly continuous random variables with joint PDF, $f$.
+
+If $X$ and $Y$ are discrete, then
+
+\begin{align}
+E[Y] &= \sum_y yf_Y(y) \\
+     &= \sum_y y \sum_x f(x,y) \\
+     &= \sum_x \sum_y yf(x,y) \\
+     &= \sum_x \sum_y yf_{Y|X}(y|x)f_X(x) \\
+     &= \sum_x (\sum_y yf_{Y|X}(y|x))f_X(x) \\
+     &= \sum_x (E[Y | X=x])f_X(x) \\
+     &= E[E[Y | X]].
+\end{align}
+
+Likewise, if $X$ and $Y$ are jointly continuous, then
+
+\begin{align}
+E[Y] &= \int_{-\infty}^{\infty} yf_Y(y)dy \\
+     &= \int_{-\infty}^{\infty} y (\int_{-\infty}^{\infty} f_{XY}(x,y)dx) dy \\
+     &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} yf_{XY}(x,y)dydx \\
+     &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} yf_{Y|X}(y|x) f_X(x)dydx \\
+     &= \int_{-\infty}^{\infty} (\int_{-\infty}^{\infty} yf_{Y|X}(y|x)dy) f_X(x)dx \\
+     &= \int_{-\infty}^{\infty} (E[Y | X=x]) f_X(x)dx \\
+     &= E[E[Y | X]].
+\end{align}
+:::
+
+
+::: {.theorem name="Law of Total Variance"}
+For random variables $X$ and $Y$,
+
+$$V[Y] = E[V[Y | X]] + V[E[Y | X]].$$
+:::
+
+
+::: {.proof name="Law of Total Variance"}
+For random variables $X$ and $Y$,
+
+\begin{align}
+V[Y] &= E[Y^2] - E[Y]^2 \\
+     &= E[E[Y^2 | X]] - E[E[Y | X]]^2 \\
+     &= E[E[Y^2 | X] - E[Y | X]^2 + E[Y | X]^2] - E[E[Y | X]]^2 \\
+     &= E[V[Y | X] + E[Y | X]^2] - E[E[Y | X]]^2 \\
+     &= E[V[Y | X]] + (E[E[Y | X]^2] - E[E[Y | X]]^2) \\
+     &= E[V[Y | X]] + V[E[Y | X]].
+
+\end{align}
+:::
+
+
+::: {.theorem name="Properties of Deviations from the CEF"}
+Let $X$ and $Y$ be random variables and let $\epsilon = Y - E[Y | X]$. Then,
+
+* $E[\epsilon | X] = 0$.
+* $E[\epsilon] = 0$.
+* If $g$ is a function of $X$, then $Cov[g(X), \epsilon] = 0$.
+* $V[\epsilon | X] = V[Y | X]$.
+* $V[\epsilon] = E[V[Y | X]]$.
+:::
+
+
+::: {.proof name="Properties of Deviations from the CEF"}
+Noting that $E[Y|X]$ is a function solely of $X$, $\epsilon = Y - E[Y | X]$, and applying the theorem above,
+
+$$E[\epsilon | X] = E[Y - E[Y|X] | X] = E[Y|X] - E[Y|X] = 0.$$
+
+Applying the Law of Iterated Expectations,
+$$E[\epsilon] = E[E[\epsilon | X]] = E[0] = 0.$$
+Let $g$ be a function of $X$. Then
+
+\begin{align}
+Cov[g(X), \epsilon] &= E[g(X) \epsilon] - E[g(X)]E[\epsilon] \\
+                    &= E[g(X)(Y - E[Y|X])] - E[g(X)](0) \\
+                    &= E[g(X)Y - g(X)E[Y|X]] \\
+                    &= E[g(X)Y] - E[g(X)E[Y|X]] \\
+                    &= E[g(X)Y] - E[E[g(X)Y|X]] \\
+                    &= E[g(X)Y] - E[g(X)Y] \\
+                    &= 0. \\
+\end{align}
+
+Recalling the definition of conditional variance, 
+
+\begin{align}
+V[\epsilon | X] &= E[(\epsilon - E[\epsilon | X])^2 | X] \\
+                &= E[(\epsilon - 0)^2 | X] \\
+                &= E[\epsilon ^2 | X] \\
+                &= E[(Y - E[Y|X])^2 | X] \\
+                &= V[Y | X]. \\
+\end{align}
+
+Finally, by the Law of Total Variance,
+
+\begin{align}
+V[\epsilon] &= E[V[\epsilon | X]] + V[E[\epsilon | X]] \\
+            &= E[V[\epsilon | X]] + V[0] \\
+            &= E[V[\epsilon | X]] \\
+            &= E[V[Y | X]].
+\end{align}
+:::
+
+
+::: {.theorem name="The CEF is the Best Predictor"}
+For random variables $X$ and $Y$, the CEF, $E[Y | X]$, is the best (minimum MSE) predictor of $Y$ given $X$.
+:::
+
+
+::: {.proof name="The CEF is the Best Predictor"}
+Choose any $g(X)$ to approximate $Y$. Let $U = Y - g(X)$. By definition of minimum MSE, our goal is to choose $g(X)$ to minimize $E[U^2]$. Let $\epsilon = Y - E[Y|X]$ and $W = E[Y|X] - g(X)$, so that $U = \epsilon + W$. ($W$ is a function of $X$, so we can treat it like a constant in expectations conditioned on $X$). Our goal is then to show that, by choosing $g(X) = E[Y|X]$, we will minimize $E[U^2]$. Now,
+
+\begin{align}
+E[U^2|X] &= E[(\epsilon + W)^2 | X] \\
+         &= E[\epsilon^2 + 2 \epsilon W + W^2 | X] \\
+         &= E[\epsilon^2 | X] + 2WE[\epsilon | X] + W^2 \\
+         &= E[\epsilon^2 | X] + 0 + W^2 \\
+         &= E[\epsilon^2 | X] - E[\epsilon | X]^2 + W^2 \\
+         &= V[Y|X] + W^2.
+\end{align}
+
+Where the third and fifth lines follow from properties of deviations from the CEF. Thus, applying the Law of Iterated Expectations we get:
+
+$$E[U^2] = E[E[U^2|W]] = E[V[Y|X] + W^2] = E[V[Y|X]] + E[W^2].$$
+$E[V[Y|X]]$ does not depend on the choice of $g(X)$. Additionally, $E[W^2] \geq 0$, with equality if $g(X) = E[Y|X]$. Therefore, choosing $g(X) = E[Y|X]$ minimizes MSE.
 :::

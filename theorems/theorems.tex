@@ -1,0 +1,1574 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Theorems \& Definitions},
+  pdfauthor={Akiko Iwamizu},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Theorems \& Definitions}
+\author{Akiko Iwamizu}
+\date{9/15/2021}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{probability}{%
+\section{Probability}\label{probability}}
+
+\begin{definition}[Event Space]
+\protect\hypertarget{def:unlabeled-div-1}{}\label{def:unlabeled-div-1}
+
+A set \(S\) of subsets of \(\Omega\) is an \emph{event space} if it satisfies the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Nonempty}: \(S\) \(\ne\) \(\emptyset\).
+\item
+  \emph{Closed under complements}: if \(A\) \(\in\) \(S\), then \(A^c\) \(\in\) \(S\).
+\item
+  \emph{Closed under countable unions}: if \(A_1\), \(A_2\), \(A_3\),\ldots{} \(\in\) \(S\), then \(A_1\) \(\cup\) \(A_2\) \(\cup\) \(A_3\) \(\cup\) \ldots{} \(\in\) \(S\).
+\end{itemize}
+
+~
+
+\end{definition}
+
+\begin{definition}[Kolmogorov Axioms]
+\protect\hypertarget{def:unlabeled-div-2}{}\label{def:unlabeled-div-2}
+
+Let \(\Omega\) be a \emph{sample space}, \(S\) be an \emph{event space}, and \(P\) be a \emph{probability measure}. Then (\(\Omega\),\(S\),\(P\)) is a \emph{probability space} if it satifies the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Non-negativity}: \(\forall\)\(A\) \(\in\) \(S\), \(P(A) \ge 0\) where \(P(A)\) is finite and real.
+\item
+  \emph{Unitary}: \(P(\Omega) = 1\).
+\item
+  \emph{Countable additivity}: if \(A_1\), \(A_2\), \(A_3\),\ldots{} \(\in\) \(S\) are pairwise disjoint, then
+  \[P(A_1 \cup A_2 \cup A_3 \cup ...) = P(A_1) + P(A_2) + P(A_3) +... = \sum P(A_i).\]
+\end{itemize}
+
+The intuition behind these axioms is as follow: The first axiom states that the probability of any event is a non-negative number; there cannot be a less-than-zero chance of an event occuring. The second axiom states that the probability measure of the entire sample space is one. In other words, it is certain that some outcome will occur. Finally, the third axiom states that, given any number of \emph{mutually exclusive events}, the probability that one of those events will occur is the sum of their individual probabilities.
+
+~
+
+\end{definition}
+
+\begin{definition}[Pairwise Disjoint]
+\protect\hypertarget{def:unlabeled-div-3}{}\label{def:unlabeled-div-3}
+
+Recall that sets \(A\) and \(B\) are disjoint if \(A \cap B = \emptyset\). We say that \(A_1\), \(A_2\), \(A_3\),\ldots{} are pairwise disjoint if each of them is disjoint from every other, that is, \(\forall i \ne j, A_i \cap A_j = \emptyset\).
+
+~
+
+\end{definition}
+
+\begin{theorem}[Basic Properties of Probability]
+\protect\hypertarget{thm:unlabeled-div-4}{}\label{thm:unlabeled-div-4}
+
+Let (\(\Omega\),\(S\),\(P\)) be a probability space. Then
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Monotonicity}: \(\forall A, B \in S\), if \(A \subseteq B\), then \(P(A) \le P(B)\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Monotonicity implies that, if one event is a subset of another (so that the former always occurs whenever the latter does), then the probability of the former occurring is no greather than that of the latter.
+  \end{itemize}
+\item
+  \emph{Subtraction rule}: \(\forall A, B \in S\), if \(A \subseteq B\), then \(P(B \setminus A) = P(B) - P(A)\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The subtraction rule implies that the probability that the second event occurs but not the first is equal to the probability of the second event minus the probability of the first event.
+  \end{itemize}
+\item
+  \emph{Zero probability of the empty set}: \(P(\emptyset) = 0\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Zero probability of the empty set means that some event in our event space must occur, and probability bounds mean that each of these events has some probability of occuring between zero and one.
+  \end{itemize}
+\item
+  \emph{Probability bounds}: \(\forall A \in S\), \(0 \le P(A) \le 1\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Monotonicity and unitarity (and non-negativity) imply the probability bounds since \(A \subseteq \Omega\).
+  \end{itemize}
+\item
+  \emph{Complement rule}: \(\forall A \in S\), \(P(A^c) = 1 - P(A)\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The complement rule implies that the probability of any of these events not occurring is one minus the probability of the event occurring - so that the probability that a given event either occurs or does not occur is one.
+  \end{itemize}
+\end{itemize}
+
+~
+
+\end{theorem}
+
+\begin{definition}[Joint Probability]
+\protect\hypertarget{def:unlabeled-div-5}{}\label{def:unlabeled-div-5}
+
+For \(A, B \in S\), the \emph{joint probability} of \(A\) and \(B\) is \(P(A \cap B)\).
+
+In other words, the joint probability of two events \(A\) and \(B\) is the probability of the intersection of \(A\) and \(B\) (which is itself an event in \(S\)), that is, the set of all states of the world in which both \(A\) and \(B\) occur.
+
+~
+
+\end{definition}
+
+\begin{theorem}[Addition Rule]
+\protect\hypertarget{thm:unlabeled-div-6}{}\label{thm:unlabeled-div-6}
+
+For \(A, B \in S\),
+\[P(A \cup B) = P(A) + P(B) - P(A \cap B).\]
+
+~
+
+\end{theorem}
+
+\begin{definition}[Conditional Probability]
+\protect\hypertarget{def:unlabeled-div-7}{}\label{def:unlabeled-div-7}
+
+For \(A, B \in S\) with \(P(B) > 0\), the \emph{conditional probability} of \(A\) given \(B\) is
+\[P(A \mid B) = \frac {P(A \cap B)}{P(B)}.\]
+
+~
+
+\end{definition}
+
+\begin{theorem}[Multiplicative Law of Probability]
+\protect\hypertarget{thm:unlabeled-div-8}{}\label{thm:unlabeled-div-8}
+
+For \(A, B \in S\) with \(P(B) > 0\),
+\[P(A \mid B)P(B) = P(A \cap B).\]
+\[P(A \cap B) = P(B|A)P(A).\]
+
+~
+
+\end{theorem}
+
+\begin{theorem}[Bayes' Rule]
+\protect\hypertarget{thm:unlabeled-div-9}{}\label{thm:unlabeled-div-9}
+
+For \(A, B \in S\) with \(P(A) > 0\) and \(P(B) > 0\),
+\[P(A \mid B) = \frac {P(B \mid A)P(A)}{P(B)}.\]
+
+~
+
+\end{theorem}
+
+\begin{definition}[Partition Rule 1]
+\protect\hypertarget{def:unlabeled-div-10}{}\label{def:unlabeled-div-10}
+
+If \(A_1\), \(A_2\), \(A_3\),\ldots{} \(\in\) \(S\) are nonempty and pairwise disjoint, and \(\Omega = A_1 \cup A_2 \cup A_3 \cup ...\), then \{\(A_1\), \(A_2\), \(A_3\),\ldots\} is a \emph{partition} of \(\Omega\).
+
+\[A = A \cap (B \cup B^c) = (A \cap B) \cup (A \cap B^c) = (A \cap B) \cup (A \setminus B).\]
+
+~
+
+\end{definition}
+
+\begin{definition}[Partition Rule 2]
+\protect\hypertarget{def:unlabeled-div-11}{}\label{def:unlabeled-div-11}
+
+If \(A_1\), \(A_2\), \(A_3\),\ldots{} \(\in\) \(S\) are nonempty and pairwise disjoint, and \(\Omega = A_1 \cup A_2 \cup A_3 \cup ...\), then \{\(A_1\), \(A_2\), \(A_3\),\ldots\} is a \emph{partition} of \(\Omega\).
+\[A \cup B = [(A \setminus B) \cup (A \cap B)] \cup [(A \cap B) \cup (B \setminus A)] = (A \setminus B) \cup (A \cap B) \cup (B \setminus A).\]
+
+~
+
+\end{definition}
+
+\begin{theorem}[Law of Total Probability]
+\protect\hypertarget{thm:unlabeled-div-12}{}\label{thm:unlabeled-div-12}
+
+If \{\(A_1\), \(A_2\), \(A_3\),\ldots\} is a \emph{partition} of \(\Omega\) and \(B \in S\), then
+\[P(B) = \sum P(B \cap A_i).\]
+
+If we also have \(P(A_i) > 0\) for \(i\) = 1,2,3,\ldots, then this can also be stated as
+\[P(B) = \sum P(B \mid A_i)P(A_i).\]
+
+~
+
+\end{theorem}
+
+\begin{theorem}[Alternative Forms of Bayes' Rule]
+\protect\hypertarget{thm:unlabeled-div-13}{}\label{thm:unlabeled-div-13}
+
+If \{\(A_1\), \(A_2\), \(A_3\),\ldots\} is a \emph{partition} of \(\Omega\) with \(P(A_i) > 0\) for \(i\) = 1,2,3,\ldots, and \(B \in S\), then apply the Law of Total Probability to the denominator to get
+
+\[P(A_j \mid B) = \frac {P(B \mid A_j)P(A_j)}{\sum P(B \cap A_i)}.\]
+\[P(A_j \mid B) = \frac {P(B \mid A_j)P(A_j)}{\sum P(B \mid A_i)P(A_i)}.\]
+\[P(A \mid B) = \frac {P(B \mid A)P(A)}{P(B \mid A)P(A) + P(B \mid A^c)P(A^c)}.\]
+
+~
+
+\end{theorem}
+
+\begin{definition}[Independence of Events]
+\protect\hypertarget{def:unlabeled-div-14}{}\label{def:unlabeled-div-14}
+
+Events \(A,B \in S\) are \emph{independent} if
+\[P(A \cap B) = P(A)P(B).\]
+
+~
+
+\end{definition}
+
+\begin{theorem}[Conditional Probability and Independence]
+\protect\hypertarget{thm:unlabeled-div-15}{}\label{thm:unlabeled-div-15}
+
+For \(A,B \in S\) with \(P(B) > 0\), \(A\) and \(B\) are independent if and only if
+\[P(A \mid B) = P(A).\]
+
+~
+
+\end{theorem}
+
+\hypertarget{random-variables}{%
+\section{Random Variables}\label{random-variables}}
+
+\begin{definition}[Random Variable]
+\protect\hypertarget{def:unlabeled-div-16}{}\label{def:unlabeled-div-16}
+
+A \emph{random variable} is a function \(X: \Omega \to \mathbb{R}\) such that
+
+\[\forall r \in \mathbb{R}, \{\omega \in \Omega: X(\omega) \leq r \} \in S.\]
+
+Where each \(\omega \in \Omega\) denotes a state of the world, which may be represented by anything: numbers, letters, words, etc. to describe all the distinct possible outcomes that could occur. A \emph{random variable} maps each of these states of the world to a real number. Thus, it is often remarked that, a \emph{random variable} is neither random nor a variable, as it is merely a \emph{function}. So when the state of the world is \(\omega\), the random variable takes on the value \(X(\omega)\). For example, the event \(\{X = 1\}\) should be understood to mean the set of states \(\{\omega \in \Omega: X(\omega) = 1\}\).
+
+\end{definition}
+
+\begin{definition}[Function of a Random Variable]
+\protect\hypertarget{def:unlabeled-div-17}{}\label{def:unlabeled-div-17}
+
+Let \(g: U \to \mathbb{R}\) be a function, where \(X(\Omega) \subseteq U \subseteq \mathbb{R}\). Then, if \(g \circ X: \Omega \to \mathbb{R}\) is a random variable, we say that \(g\) is a \emph{function of X}, and write \(g(X)\) to denote the randome variable \(g \circ X\). This general definition allows us to formally work with transformations of random variables as random variables in their own right.
+
+\end{definition}
+
+\begin{definition}[Operator on a Random Variable]
+\protect\hypertarget{def:unlabeled-div-18}{}\label{def:unlabeled-div-18}
+
+An \emph{operator} \(A\) on a random variable maps the function \(X(\cdot)\) to a real number, denoted by \(A[X]\).
+
+\end{definition}
+
+\begin{example}[Example of a Random Variable]
+\protect\hypertarget{exm:unlabeled-div-19}{}\label{exm:unlabeled-div-19}
+
+We can define events in \(S\) in terms of a random variable \(X\). For example we could let
+
+\begin{itemize}
+\tightlist
+\item
+  \(A = \{\omega \in \Omega: X(\omega) = 1\} = \{X = 1\}.\)
+\item
+  \(B = \{\omega \in \Omega: X(\omega) \geq 0\} = \{X \geq 0\}.\)
+\item
+  \(C = \{\omega \in \Omega: X(\omega)^2 \le 10, X(\omega) \neq 3\} = \{X(\omega)^2 \le 10, X(\omega) \neq 3\}.\)
+\item
+  \(PR[X = 1] = P(A).\)
+\item
+  \(PR[X \geq 0] = P(B).\)
+\item
+  \(PR[X(\omega)^2 \le 10, X(\omega) \neq 3] = P(C).\)
+\end{itemize}
+
+\end{example}
+
+\begin{definition}[Discrete Random Variable]
+\protect\hypertarget{def:unlabeled-div-20}{}\label{def:unlabeled-div-20}
+
+A random variable \(X\) is \emph{discrete} if its range, \(X(\Omega)\), is a countable set. In other words, a \emph{discrete random variable} is a random variable that can only take on a finite or countably infinite number of different values.
+
+\end{definition}
+
+\begin{definition}[Probability Mass Function (PMF)]
+\protect\hypertarget{def:unlabeled-div-21}{}\label{def:unlabeled-div-21}
+
+For a discrete random variable \(X\), the \emph{probability mass function} of \(X\) is:
+
+\[f(x) = Pr[X = x], \forall x \in \mathbb{R}.\]
+
+\end{definition}
+
+\begin{example}[A Fair Die Roll]
+\protect\hypertarget{exm:unlabeled-div-22}{}\label{exm:unlabeled-div-22}
+
+We can apply the definition of \emph{PMF} to our familiar die roll example. Consider a roll of one fair (six-sided) die. Let \(X\) take on the value of the outcome of the die roll; that is, let \(\Omega = \{1,2,3,4,5,6\}\) and \(X(\omega) = \omega, \forall \omega \in \Omega\). Then \(Pr[X = 1] = Pr[X = 2] = ... = Pr[X = 6] = \frac{1}{6}\). Out of many die rolls, we expect each of the values 1 through 6 to come up one sixth of the time. Thus, the \emph{PMF} of \(X\) is:
+
+\[f(x) = \begin{cases} \frac{1}{6} & : x \in \{1,2,3,4,5,6\} \\ 0 & : otherwise. \end{cases}\]
+
+\end{example}
+
+\begin{example}[A Biased Coin Flip (Bernoulli Distribution)]
+\protect\hypertarget{exm:unlabeled-div-23}{}\label{exm:unlabeled-div-23}
+
+We can also highlight a generalization of our coin flip example: a biased coin flip where the resuling random variable is known as a \emph{Bernoulli} random variable. Consider a coin flip with a (potentially) biased coin - that is, a coin that comes up tails with some unknown probability. Let \(X = 0\) if the coin comes up heads and \(X = 1\) if the coin comes up tails; that is, let \(\Omega = \{H,T\}\) and let \(X(H) = 0\) and \(X(T) = 1\). Let \(p\) be the probability that the coin comes up tails: \(Pr[X = 1] = p\) and let \(Pr[X = 0] = 1 - Pr[X = 1] = 1 - p\). Out of many coin flips, we expect that the proportion of times the coin comes up tails will be \(p\) and the proportion of the times the coin comes up heads will be \(1 - p\). The random variable \(X\) thus has a \emph{PMF} of:
+
+\[f(x) = \begin{cases} 1 - p & : x = 0 \\ p & : x = 1 \\ 0 & : otherwise. \end{cases}\]
+
+\end{example}
+
+\begin{example}[Flipping a Biased Coin Until It Comes Up Tails (Geometric Distribution)]
+\protect\hypertarget{exm:unlabeled-div-24}{}\label{exm:unlabeled-div-24}
+
+This example illustrates how a discrete random variable can have a countably infinite number of possible values. Suppose we flipped a (potentially) biased coin repeatedly until the first time it came up tails. Let \(p\) be the probability that the coin comes up tails, and assume \(0 < p < 1\). Let \(X\) be the number of flips it takes to get tails. For any given positive integer \(x\), getting the first tails on exactly the \(x^{th}\) flip requires getting heads on each of the first \(x - 1\) flips and then tails on the \(x^{th}\) flip. The probability of this happening is \((1 - p)^{x - 1}p\), or the product of the probabilities of the desired outcome on each flip (since the flips are independent). So the \emph{PMF} of \(X\) is:
+
+\[f(x) = \begin{cases} (1 - p)^{x - 1}p & : x \in \mathbb{N} \\ 0 & : otherwise. \end{cases}\]
+For example, if it is a fair coin (that is, \(p = 1 - p = \frac{1}{2}\)) then \(\forall x \in \mathbb{N}, Pr[X = x] = (\frac{1}{2})^{x}\); the first tails will be obtained on the first flip with probability \(\frac{1}{2}\), on the second flip with probability \(\frac{1}{4}\), on the third flip with probability \(\frac{1}{8}\), and so on. Thus, \(X\) can take on \emph{any} positive integer value, albeit with vanishingly small probability for large values.
+
+\end{example}
+
+\begin{example}[PMF & the Distribution of Discrete Random Variables]
+\protect\hypertarget{exm:unlabeled-div-25}{}\label{exm:unlabeled-div-25}
+
+For a discrete random variable \(X\), the \emph{PMF} tells us everything about its \emph{distribution}, which is loosely defined as the collection of probabilities assigned to events that can be defined just in terms of \(X\). To illustrate how the \emph{PMF} can fully describe a discrete random variable, consider a random variable \(X\) such that \(f(x) = 0, \forall x \notin \mathbb{Z}\) (that is, \(X\) takes on only integer values). Then:
+
+\begin{itemize}
+\tightlist
+\item
+  \(Pr[X \geq 3] = \sum_{x=3}^{\infty}f(x).\)
+\item
+  \(Pr[X \geq 3 or X = 1] = f(1) + \sum_{x=3}^{\infty}f(x).\)
+\item
+  \(Pr[X < 4] = \sum_{x=1}^{3}f(x).\)
+\end{itemize}
+
+For example, for a fair (six-sided) die roll:
+
+\begin{itemize}
+\tightlist
+\item
+  \(Pr[X \geq 3] = \sum_{x=3}^{6}f(x) = \frac{4}{6} = \frac{2}{3}.\)
+\item
+  \(Pr[X \geq 3 or X = 1] = f(1) + \sum_{x=3}^{6}f(x) = \frac{1}{6} + \frac{4}{6} = \frac{5}{6}.\)
+\item
+  \(Pr[X < 4] = \sum_{x=1}^{3}f(x) = \frac{3}{6} = \frac{1}{2}.\)
+\end{itemize}
+
+\end{example}
+
+\begin{theorem}[Properties of PMFs]
+\protect\hypertarget{thm:unlabeled-div-26}{}\label{thm:unlabeled-div-26}
+
+For a discrete random variable \(X\) with \emph{PMF} \(f\):
+
+\begin{itemize}
+\tightlist
+\item
+  \(\forall x \in \mathbb{R}, f(x) \geq 0.\)
+\item
+  \(\sum_{x \in X(\Omega)}f(x) = 1.\)
+\end{itemize}
+
+The proof of this theorem follows directly from the \emph{Kolmogorov axioms}.
+
+\end{theorem}
+
+\begin{theorem}[Event Probabilities for Discrete Random Variables]
+\protect\hypertarget{thm:unlabeled-div-27}{}\label{thm:unlabeled-div-27}
+
+More generally, this theorem gives the formula for using the \emph{PMF} to compute the probability of \emph{any} event defined in terms of a discrete random variable \(X\). For a discrete random variable \(X\) with \emph{PMF} \(f\), if \(D \subseteq \mathbb{R}\) and \(A = \{X \in D\}\), then:
+
+\[P(A) = Pr[X \in D] = \sum_{x \in X(A)}f(x).\]
+
+The proof of this theorem follows directly from the \emph{Kolmogorov axioms}. Note that any condiiton on \(X\) can be expressed as \(X \in D\) for some set \(D \subseteq \mathbb{R}\), so this theorem allows us to compute the probability of any event defined in terms of a discrete random variable \(X\).
+
+\end{theorem}
+
+\begin{definition}[Cumulative Distribution Function (CDF)]
+\protect\hypertarget{def:unlabeled-div-28}{}\label{def:unlabeled-div-28}
+
+For a random variable \(X\), the \emph{cumulative distribution function} of \(X\) is:
+
+\[F(x) = Pr[X \leq x], \forall x \in \mathbb{R}.\]
+The CDF returns the probability that an outcome for a random variable will be less than or equal to a given value. Importantly, given any random variable, the CDF tells us everything there is to know about its behavior. For any event that can be described in terms of a random variable, we can derive the event's probability from the CDF of the random variable alone.
+
+\end{definition}
+
+\begin{theorem}[Properties of CDFs]
+\protect\hypertarget{thm:unlabeled-div-29}{}\label{thm:unlabeled-div-29}
+
+The following important properties of CDFs follow immediately from the axioms and basic properties of probability. For a random variable \(X\) with CDF \(F\),
+
+\begin{itemize}
+\tightlist
+\item
+  \(F\) is nondecreasing: \(\forall x_1, x_2 \in \mathbb{R}\), if \(x_1 < x_2\), then \(F(x_1) \leq F(x_2)\).
+\item
+  \(\lim_{x \to -\infty} F(x) = 0\).
+\item
+  \(\lim_{x \to \infty} F(x) = 1\).
+\item
+  \(\forall x \in \mathbb{R}, 1-F(x) = Pr[X > x]\).
+\end{itemize}
+
+\end{theorem}
+
+\begin{example}[CDF of a Fair Die Roll]
+\protect\hypertarget{exm:unlabeled-div-30}{}\label{exm:unlabeled-div-30}
+
+For discrete random variables such as a die roll, the CDF is necessarily a step function, that is, a function that is flat everywhere except where it ``jumps'' from one value to another as the CDF increases by \frac{1}{6} at each value in \{1,2,3,4,5,6\}. We can evaluate the CDF at any real value, for example,
+
+\begin{itemize}
+\tightlist
+\item
+  \(F(-1) = 0\).
+\item
+  \(F(1) = \frac{1}{6}\).
+\item
+  \(F(1.5) = \frac{1}{6}\).
+\item
+  \(F(2) = \frac{2}{6} = \frac{1}{3}\).
+\item
+  \(F(6) = 1\).
+\item
+  \(F(7) = 1\).
+\item
+  \(F(24,603) = 1\).
+\end{itemize}
+
+Note that, in this example, the value of the CDF for any \(x\) greater than or equal to 6 will be 1; since any outcome we get is guaranteed to be less than or equal to 6, or 7, or 24,603. Additionally, we can use the CDF to compute probabilities:
+
+\begin{itemize}
+\tightlist
+\item
+  \(Pr[X < 2] = Pr[X \leq 1] = F(1) = \frac{1}{6}\),
+\item
+  \(Pr[X \geq 3] = 1- Pr[X < 3] = 1- Pr[X \leq 2] = 1 - F(2) = 1 - \frac{2}{6} = \frac{4}{6} = \frac{2}{3}\),
+\item
+  \(Pr[2 \leq X \leq 4] = Pr[X \leq 4] - Pr[X < 2] = F(4) - F(1) = \frac{4}{6} - \frac{1}{6} = \frac{3}{6} = \frac{1}{2}\),
+\end{itemize}
+
+where the second line applies the \emph{Complement Rule} and the third applies the \emph{Subtraction Rule}.
+
+\end{example}
+
+\begin{definition}[Continuous Random Variable]
+\protect\hypertarget{def:unlabeled-div-31}{}\label{def:unlabeled-div-31}
+
+A random variable \(X\) is \emph{continuous} if there exists a non-negative function \(f: \mathbb{R} \to \mathbb{R}\) such that the CDF of \(X\) is:
+
+\[F(X) = Pr[X \leq x] = \int_{-\infty}^x f(u)du, \forall x \in \mathbb{R}.\]
+
+\end{definition}
+
+\begin{definition}[Probability Density Function (PDF)]
+\protect\hypertarget{def:unlabeled-div-32}{}\label{def:unlabeled-div-32}
+
+The function \(f\) is called the \emph{probability density function (PDF)}. The Fundamental Theorem of Calculus implies that, for any continuous random variable, the PDF is unique and defined as below. For a continuous random variable \(X\) with CDF \(F\), the \emph{probability density function} of \(X\) is:
+
+\[f(x) = \left.\frac{dF(u)}{du} \right\vert_{u=x}, \forall x \in \mathbb{R}.\]
+Conceptually, the PDF is the continuous analog to the PMF in that it describes how the CDF changes with \(x\). The difference is that, whereas PMF specifies the size of the ``jump'' in the CDF at a point \(x\), a PDF gives the instantaneous slope (derivative) of the CDF at a point \(x\). That is, for a very small number of \(\epsilon > 0\), if we moved from \(x\) to \(x + \epsilon\), the CDF would change by appox \(\epsilon f(x)\).
+
+\end{definition}
+
+\begin{theorem}[Properties of PDFs]
+\protect\hypertarget{thm:unlabeled-div-33}{}\label{thm:unlabeled-div-33}
+
+For a continuous random variable \(X\) with PDF \(f\),
+
+\begin{itemize}
+\tightlist
+\item
+  \(\forall x \in \mathbb{R}, f(x) \geq 0\).
+\item
+  \(\int_{-\infty}^{\infty} f(x)dx = 1\).
+\end{itemize}
+
+\end{theorem}
+
+\begin{theorem}[Properties of PDFs]
+\protect\hypertarget{thm:unlabeled-div-34}{}\label{thm:unlabeled-div-34}
+
+This theorem establishes that we can express any event of the form \(\{X \in I\}\), where \(I\) is an interval in \mathbb{R}, in terms of integrals of the PDF. For a continuous random variable \(X\) with PDF \(f\),
+
+\begin{itemize}
+\tightlist
+\item
+  \(\forall x \in \mathbb{R}, Pr[X = x] = 0\).
+\item
+  \(\forall x \in \mathbb{R}, Pr[X < x] = Pr[X \leq x] = F(x) = \int_{-\infty}^{x} f(u)du\).
+\item
+  \(\forall x \in \mathbb{R}, Pr[X > x] = Pr[X \geq x] = 1 - F(x) = \int_{x}^{\infty} f(u)du\).
+\item
+  \(\forall a,b \in \mathbb{R}\) with \(a \leq b\),
+\end{itemize}
+
+\[\begin{align} Pr[a < X < b] &= Pr[a \leq X < b] \\ &= Pr[a < X \leq b] \\ &= Pr[a \leq X \leq b] \\ &= F(b) - F(a) \\ &= \int_a^b f(x)dx. \end{align}\]
+
+\end{theorem}
+
+\begin{example}[Standard Uniform Distribution]
+\protect\hypertarget{exm:unlabeled-div-35}{}\label{exm:unlabeled-div-35}
+
+Consider the standard uniform distribution, denoted by \(U(0,1)\). Informally, if a random variable \(X\) follows the standard uniform distribution, \(X\) takes on a random real value from the internal {[}0,1{]}, with all values in this interval equally likely to occur. We write \(X \thicksim U(0,1)\) to denote that \(X\) follows the standard uniform distribution.
+
+The PDF of \(U(0,1)\) is:
+
+\[f(x) = \begin{cases} 1 & : 0 \leq x \leq 1 \\ 0 & : otherwise.  \end{cases}\]
+
+The CDF of \(U(0,1) is\):
+
+\[F(x) = Pr[X \leq x] = \int_{-\infty}^x f(u)du = \begin{cases} 0 & : x < 0 \\ x & : 0 \leq x \leq 1 \\ 1 & : x > 1.  \end{cases}\]
+
+\end{example}
+
+\begin{example}[Standard Normal Distribution]
+\protect\hypertarget{exm:unlabeled-div-36}{}\label{exm:unlabeled-div-36}
+
+You may be familiar with the standard normal (or Gaussian) distribution. The standard normal distribution is denoted by \(N(0,1)\).
+
+The PDF of \(N(0,1)\) is:
+
+\[\phi(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}.\]
+
+The CDF of \(N(0,1) is\):
+
+\[\Phi(x) = \int_{-\infty}^x \frac{1}{\sqrt{2\pi}}e^{-\frac{u^2}{2}}du.\]
+
+\end{example}
+
+\begin{definition}[Support]
+\protect\hypertarget{def:unlabeled-div-37}{}\label{def:unlabeled-div-37}
+
+For a random variable \(X\) with PMF/PDF \(f\), the \emph{support} of \(X\) is:
+
+\[Supp[X] = \{x \in \mathbb{R} : f(x) > 0\}.\]
+
+\begin{itemize}
+\tightlist
+\item
+  When the random variable \(X\) is \emph{discrete}, \(Supp[X]\) is the set of values that \(X\) takes on with nonzero probability. For example, if \(X\) is the outcome of a die roll, then \(Supp[X] = \{1,2,3,4,5,6\}\).
+\item
+  When the random variable \(X\) is \emph{continuous}, \(Supp[X]\) is the set of values over which \(X\) has a nonzero probability density. For example, if \(X \thicksim U(0,1)\), then \(Supp[X] = [0,1] = \{x \in \mathbb{R} : 0 \leq x \leq 1\}\).
+\end{itemize}
+
+\end{definition}
+
+\begin{definition}[Equality of Random Variables]
+\protect\hypertarget{def:unlabeled-div-38}{}\label{def:unlabeled-div-38}
+
+When we say two random variables are equal, we mean that they are equal as \emph{functions}; they assign the same value to every state of the world. Let \(X\) and \(Y\) be random variables. Then \(X = Y\) if, \(\forall \omega \in \Omega, X(\omega) = Y(\omega)\).
+
+\end{definition}
+
+\begin{definition}[Equality of Functions of a Random Variable]
+\protect\hypertarget{def:unlabeled-div-39}{}\label{def:unlabeled-div-39}
+
+From the definition above, it follows that two functions of a random variable, \(g(X)\) and \(h(X)\) are equal as random variables if and only if they are equal as functions on \(X(\Omega)\). Let \(X\) be a random variable and let \(f\) and \(g\) be functions of \(X\). Then
+
+\[g(X) = h(X) \iff \forall x \in X(\Omega), g(x) = h(x).\]
+
+\emph{Proof}:
+
+\begin{itemize}
+\item
+  Suppose that \(\forall x \in X(\Omega), g(x) = h(x)\).
+\item
+  Let \(\omega \in \Omega\).
+\item
+  Then \(X(\omega) \in X(\Omega)\), so \(g(X(\omega)) = h(X(\omega))\).
+\item
+  Thus, \(\forall \omega \in \Omega, g(X(\omega)) = h(X(\omega))\), so \(g(X) = h(X)\).
+\item
+  Now suppose that \(g(X) = h(X)\), so \(\forall \omega \in \Omega, g(X(\omega)) = h(X(\omega))\).
+\item
+  Let \(x \in X(\Omega)\).
+\item
+  Then \(\exists \omega \in \Omega\) such that \(X(\omega) = x\), so \(g(x) = h(x)\).
+\item
+  Thus, \(\forall x \in X(\Omega), g(x) = h(x).\)
+\end{itemize}
+
+\end{definition}
+
+\begin{definition}[Joint PMF]
+\protect\hypertarget{def:unlabeled-div-40}{}\label{def:unlabeled-div-40}
+
+For discrete random variables \(X\) and \(Y\), the \emph{joint PMF} of \(X\) and \(Y\) is
+
+\[f(x,y) = Pr[X=x, Y=y], \forall x,y \in \mathbb{R}.\]
+
+\end{definition}
+
+\begin{definition}[Joint CDF]
+\protect\hypertarget{def:unlabeled-div-41}{}\label{def:unlabeled-div-41}
+
+For random variables \(X\) and \(Y\), the \emph{joint CDF} of \(X\) and \(Y\) is
+
+\[F(x,y) = Pr[X \leq x, Y \leq y], \forall x,y \in \mathbb{R}.\]
+
+\end{definition}
+
+\begin{example}[Flipping a Coin and Rolling a Die]
+\protect\hypertarget{exm:unlabeled-div-42}{}\label{exm:unlabeled-div-42}
+
+Consider the generative process in which the experimenter flips a coin and then rolls either a four-sided or six-sided die depending on the outcome of the coin flip. Let \(X = 0\) if the coin comes up heads and \(X = 1\) if the coin comes up tails, and let Y be the value of the outcome of the die roll. Then the \emph{joint PMF} of \(X\) and \(Y\) is
+
+\[f(x,y) = \begin{cases} \frac{1}{8} &: x = 0, y \in \{1,2,3,4\} \\ \frac{1}{12} &: x = 1, y \in \{1,2,3,4,5,6\} \\ 0 &: otherwise. \end{cases}\]
+
+For discrete random variables, the \emph{joint CDF} is constructed by summing over the appropriate values of \(X\) and \(Y\). For example,
+
+\[\begin{align}F(1,3) &=\sum_{x \leq 1}\sum_{y \leq 3} f(x,y) \\ &= f(0,1) + f(0,2) + f(0,3) + f(1,1) + f(1,2) + f(1,3) \\ &= \frac{1}{8} + \frac{1}{8} + \frac{1}{8} + \frac{1}{12} + \frac{1}{12} + \frac{1}{12} \\ &= \frac{5}{8}. \end{align}\]
+
+\end{example}
+
+\begin{theorem}[Marginal PMF]
+\protect\hypertarget{thm:unlabeled-div-43}{}\label{thm:unlabeled-div-43}
+
+For discrete random variables \(X\) and \(Y\) with joint PMF \(f\), the \emph{marginal PMF} of \(Y\) is
+
+\[f_Y(y) = Pr[Y = y] = \sum_{x \in Supp[X]}f(x,y), \forall y \in \mathbb{R}.\]
+The proof for this theorem follows directly from the \emph{Law of Total Probability} where we sum the joint probabilities of \(X = x\) and \(Y = y\) for every possible outcome for \(X\) to get the overall probability that \(Y = y\). We can also compute the marginal PMF of \(X\) analogously.
+
+\end{theorem}
+
+\begin{definition}[Conditional PMF]
+\protect\hypertarget{def:unlabeled-div-44}{}\label{def:unlabeled-div-44}
+
+For discrete random variables \(X\) and \(Y\) with joint PMF \(f\), the \emph{conditional PMF} of \(Y\) given \(X = x\) is
+
+\[f_{Y|x}(y|x) = Pr[Y = y | X = x] = \frac{Pr[X = x, Y = y]}{P[X = x]} = \frac{f(x,y)}{f_X(x)},\]
+\(\forall y \in \mathbb{R}\) and \(\forall x \in Supp[X]\).
+
+Since \(\forall x \in Supp[X]\) is equivalent to \(f_X(x) > 0\), this domain condition ensures that the denominator is nonzero. The conditional PMF of \(X\) given \(Y\) is defined analogously.
+
+\end{definition}
+
+\begin{example}[Flipping a Coin and Rolling a Die]
+\protect\hypertarget{exm:unlabeled-div-45}{}\label{exm:unlabeled-div-45}
+
+In the coin flip and die roll example, the \emph{marginal PMFs} are
+
+\[f_X(x) = \begin{cases} \frac{1}{2} &: x = 0 \\ \frac{1}{2} &: x = 1 \\ 0 &: otherwise. \end{cases}\]
+
+and
+
+\[f_Y(y) = \begin{cases} \frac{5}{24} &: y \in \{1,2,3,4\} \\ \frac{1}{12} &: y \in \{5,6\} \\ 0 &: otherwise. \end{cases}\]
+
+and the \emph{conditional PMFs} are
+
+\[f_{X|Y}(x|y) = \begin{cases} \frac{3}{5} &: x = 0, y \in \{1,2,3,4\} \\ \frac{2}{5} &: x = 1, y \in \{1,2,3,4\} \\ 1 &: x = 1, y \in \{5,6\} \\ 0 &: otherwise. \end{cases}\]
+and
+
+\[f_{Y|X}(y|x) = \begin{cases} \frac{1}{4} &: x = 0, y \in \{1,2,3,4\} \\ \frac{1}{6} &: x = 1, y \in \{1,2,3,4,5,6\} \\ 0 &: otherwise. \end{cases}\]
+
+Note that we can operate on \emph{marginal PMFs} in the same way that we would on \emph{univariate PMFs}, since they are univariate PMFs. Similarly, \emph{conditional PMFS} are \emph{univariate PMFs} given any fixed value for the conditioning variable. So, in this example, below is a \emph{univariate PMF}:
+
+\[f_{X|Y}(x|y) = \begin{cases} \frac{3}{5} &: x = 0 \\ \frac{2}{5} &: x = 1 \\ 0 &: otherwise. \end{cases}\]
+
+\end{example}
+
+\begin{theorem}[Multiplicate Law for PMFs]
+\protect\hypertarget{thm:unlabeled-div-46}{}\label{thm:unlabeled-div-46}
+
+We can arrange the definition of \emph{Conditional PMF} to obtain an analog to the \emph{Multiplicate Law of Probability} for PMFs. Let \(X\) and \(Y\) be two discrete random variables with join PMF \(f\). Then, \(\forall x \in \mathbb{R}\) and \(\forall y \in Supp[Y]\),
+
+\[f_{X|Y}(x|y)f_Y(y) = f(x,y).\]
+
+\end{theorem}
+
+\begin{definition}[Jointly Continuous Random Variables]
+\protect\hypertarget{def:unlabeled-div-47}{}\label{def:unlabeled-div-47}
+
+Two random variables \(X\) and \(Y\) are \emph{jointly continuous} if there exists a non-negative function \(f:\mathbb{R}^2 \to \mathbb{R}\) such that the joint CDF of \(X\) and \(Y\) is:
+
+\[F(x,y) = Pr[X \leq x, Y \leq y] = \int_{-\infty}^x \int_{-\infty}^y f(u,v) dydu, \forall x,y \in \mathbb{R}.\]
+The function \(f\) is called the \emph{joint probability density function (joint PDF)}. Just as a single continuous random variable is characterized by a continuous CDF, two jointly continuous random variables are characterized by a continuous joint CDF. Additionally, just as taking the derivative of the CDF of a continuous random variable yields the PDF, taking the mixed second-order partial derivative of the joint CDF of two jointly continuous random variables yields the joint PDF.
+
+\end{definition}
+
+\begin{definition}[Joint PDF]
+\protect\hypertarget{def:unlabeled-div-48}{}\label{def:unlabeled-div-48}
+
+For jointly continuous random variables \(X\) and \(Y\) with joint CDF \(F\), the \emph{joint PDF} of \(X\) and \(Y\) is:
+
+\[f(x,y) = \left.\frac{\delta^2F(u,v)}{\delta u \delta v} \right\vert_{u=x,v=y}, \forall x,y \in \mathbb{R}.\]
+
+More intuitively, as with univariate continuous distributions, event probabilities are computed by \emph{integration}: \(\forall a,b,c,d \in \mathbb{R}\) with \(a \leq b\) and \(c \leq d\),
+
+\[Pr[a \leq X \leq b, c \leq Y \leq d] = \int_a^b \int_c^d f(x,y) dydx.\]
+
+That is, the volume under the PDF over a region equals the probability that \(X\) and \(Y\) take on values such that \((X,Y)\) is a point in that region. Indeed, the probability of \emph{any} event can be computed by \emph{integration}.
+
+\end{definition}
+
+\begin{theorem}[Marginal PDF]
+\protect\hypertarget{thm:unlabeled-div-49}{}\label{thm:unlabeled-div-49}
+
+We can now define marginal PDFs analogous to marginal PMFs. As in the discrete case, the \emph{marginal PDF} of \(Y\) is just the PDF of \(Y\), ignoring the existence of \(X\). This theorem shows how a marginal PDF can be derived from a joint PDF. For jointly continuous random variables \(X\) and \(Y\) with joint PDF \(f\), the \emph{marginal PDF} of \(Y\) is:
+
+\[f_Y(y) = \int_{-\infty}^\infty f(x,y) dx, \forall y \in \mathbb{R}.\]
+The intuition is analogous to the discrete case: we use integration to ``sum'' the joint density of \(X\) and \(Y\) over all values of \(x\) to get the overall density for \(Y\) at a given \(y\). The marginal PDF of \(X\) is computed analogously.
+
+\end{theorem}
+
+\begin{definition}[Conditional PDF]
+\protect\hypertarget{def:unlabeled-div-50}{}\label{def:unlabeled-div-50}
+
+By contrast, the \emph{conditional PDF} of \(X\) given \(Y\) is the PDF of \(X\) \emph{given that} a certain value fo \(Y\) occurs. For jointly continuous random variables \(X\) and \(Y\) with joint PDF \(f\), the \emph{conditional PDF} of \(Y\) given \(X=x\) is:
+
+\[f_{Y|X}(y|x) = \frac{f(x,y)}{f_X(x)}, \forall y \in \mathbb{R}, \forall x \in Supp[X].\]
+Again, the domain condition \(x \in Supp[X]\) ensures that the denominator is nonzero. The conditional PDF of \(X\) given \(Y=y\) is defined analogously. As in the discrete case, marginal PDFS are univariate PDFs, and conditional PDFs are univariate PDFs given any fixed value for the conditioning variable.
+
+\end{definition}
+
+\begin{theorem}[Multiplicate Law for PDFs]
+\protect\hypertarget{thm:unlabeled-div-51}{}\label{thm:unlabeled-div-51}
+
+Let \(X\) and \(Y\) by two jointly continuous random variables with joint PDF \(f\). Then, \(\forall x \in \mathbb{R}\) and \(\forall y \in Supp[Y]\),
+
+\[f_{X|Y}(x|y)f_Y(y) = f(x,y), \forall y \in \mathbb{R}, \forall x \in Supp[X].\]
+
+\end{theorem}
+
+\begin{definition}[Independence of Random Variables]
+\protect\hypertarget{def:unlabeled-div-52}{}\label{def:unlabeled-div-52}
+
+Let \(X\) and \(Y\) be either two discrete random variables with joint PMF \(f\) or two jointly continuous random variables with joint PDF \(f\). Then \(X\) and \(Y\) are \emph{independent} if, \(\forall x,y \in \mathbb{R}\):
+
+\[f(x,y) = f_X(x)f_Y(y).\]
+We write \(X \perp \!\!\! \perp Y\) to denote \(X\) and \(Y\) are independent.
+
+\end{definition}
+
+\begin{theorem}[Implications of Independence (Part I)]
+\protect\hypertarget{thm:unlabeled-div-53}{}\label{thm:unlabeled-div-53}
+
+Let \(X\) and \(Y\) be either two discrete random variables with joint PMF \(f\) or two jointly continuous random variables with joint PDF \(f\). Then the following statements are equivalent (that is, each one implies all the others):
+
+\begin{itemize}
+\tightlist
+\item
+  \(X \perp \!\!\! \perp Y.\)
+\item
+  \(\forall x,y \in \mathbb{R}, f(x,y) = f_X(x)f_Y(y).\)
+\item
+  \(\forall x \in \mathbb{R}\) and \(\forall y \in Supp[Y], f_{X|Y}(x|y) = f_X(x).\)
+\item
+  \(\forall D,E \subseteq \mathbb{R},\) the events \(\{X \in D\}\) and \(\{Y \in E\}\) are independent.
+\item
+  For all functions \(g\) of \(X\) and \(h\) of \(Y\), \(g(X) \perp \!\!\! \perp h(Y).\)
+\end{itemize}
+
+\end{theorem}
+
+\hypertarget{summarizing-distributions}{%
+\section{Summarizing Distributions}\label{summarizing-distributions}}
+
+\begin{definition}[Expected Value]
+\protect\hypertarget{def:unlabeled-div-54}{}\label{def:unlabeled-div-54}
+
+For a discrete random variable \(X\) with probability mass function (PMF) \(f\), if \(\sum_x \left| x \right| f(x) < \infty\), then the \emph{expected value} of \(X\) is:
+
+\[E[X] = \sum_x xf(x).\]
+For a continuous random variable \(X\) with probability density function (PDF) \(f\), if \(\int_{-\infty}^{\infty}\left| x \right| f(x) < \infty\), then the \emph{expected value} of \(X\) is:
+
+\[E[X] = \int_{-\infty}^{\infty}xf(x)dx.\]
+The \emph{expected value} is an operator that takes as an input a random variable and returns a number. So when we compute the expected value of a random variable, we are applying the \emph{expectation operator}.
+
+\end{definition}
+
+\begin{example}[A Fair Die Roll]
+\protect\hypertarget{exm:unlabeled-div-55}{}\label{exm:unlabeled-div-55}
+
+Consider a roll of one fair (six-sided) die. Let \(X\) be the value of the outcome of the die roll. Then the \emph{expected value} of \(X\) is:
+
+\[
+E[X] = \sum_{x=1}^6 xf(x) = 1 \times (\frac{1}{6}) + 2 \times (\frac{1}{6}) + 3 \times (\frac{1}{6}) + 4 \times (\frac{1}{6}) + 5 \times (\frac{1}{6}) + 6 \times (\frac{1}{6}) = \frac{7}{2}.
+\]
+Note that a random variable does not necessarily take on its expected value with positive probability. In this example,
+
+\[Pr[X = E[X]] = Pr[X = \frac{7}{2}] = f(\frac{7}{2}) = f(3.5) = 0.\]
+
+\end{example}
+
+\begin{example}[Bernoulli Distribution]
+\protect\hypertarget{exm:unlabeled-div-56}{}\label{exm:unlabeled-div-56}
+
+Let \(X\) be a Bernoulli random variable with probability \(p\). Then:
+
+\[
+E[X] = \sum_{x=1}^1 xf(x) = 0 \times (1 - p) + 1 \times (p) = p.
+\]
+Note that this implies a convenient feature of Bernoulli random variables: \(E[X] = Pr[X = 1].\)
+
+\end{example}
+
+\begin{example}[Standard Normal Distribution]
+\protect\hypertarget{exm:unlabeled-div-57}{}\label{exm:unlabeled-div-57}
+
+Let \(X \sim N(0,1)\). Then the expected value of \(X\) is:
+
+\begin{align}
+E[X] &= \int_{-\infty}^{\infty} x \frac{1}{\sqrt {2 \pi}}e^{- \frac{x^2}{2}}dx \\
+     &= \frac{1}{\sqrt {2 \pi}} \int_{-\infty}^{\infty} x e^{- \frac{x^2}{2}}dx \\
+     &= \left. \frac{1}{\sqrt {2 \pi}} \times (-e^{- \frac{x^2}{2}}) \right\vert_{-\infty}^{\infty} \\
+     &= 0.
+\end{align}
+
+\end{example}
+
+\begin{theorem}[Expectation of a Function of a Random Variable]
+\protect\hypertarget{thm:unlabeled-div-58}{}\label{thm:unlabeled-div-58}
+
+Since functions of random variables are themselves random variables, they too have expected values. The following theorem establishes how we can compute the expectation of a function of a random variable \(g(X)\) without actually deriving the PMF or PDF of \(g(X)\).
+
+\begin{itemize}
+\tightlist
+\item
+  If \(X\) is a discrete random variable with PMF \(f\) and \(g\) is a function of \(X\), then
+\end{itemize}
+
+\[E[g(X)] = \sum_xg(x)f(x).\]
+* If \(X\) is a continuous random variable with PDF \(f\) and \(g\) is a function of \(X\), then
+
+\[E[g(X)] = \int_{-\infty}^{\infty}g(x)f(x).\]
+
+\end{theorem}
+
+\begin{theorem}[Properties of Expected Values]
+\protect\hypertarget{thm:unlabeled-div-59}{}\label{thm:unlabeled-div-59}
+
+For a random variable \(X\),
+
+\begin{itemize}
+\tightlist
+\item
+  \(\forall c \in \mathbb{R}, E[c] = c.\)
+\item
+  \(\forall a \in \mathbb{R}, E[aX] = aE[X].\)
+\end{itemize}
+
+\end{theorem}
+
+\begin{example}[Properties of Expected Values (Proofs)]
+\protect\hypertarget{exm:unlabeled-div-60}{}\label{exm:unlabeled-div-60}
+
+A constant \(c\) can be considered as a discrete random variable \(X\) with the PMF:
+
+\[
+f(x) = 
+  \begin{cases}
+  1 &: x = c \\
+  0 &: otherwise.
+  \end{cases}
+\]
+This is known as a \emph{degenerate distribution} or a \emph{degenerate random variable}. Thus, \(\forall c \in \mathbb{R}\),
+
+\[E[c] = \sum_xxf(x) = c \times f(c) = c \times 1 = c.\]
+Now, let \(a \in \mathbb{R}\) and let \(g(X) = aX\). If \(X\) is discrete with PMF \(f\), then by the \emph{Theorem of Expectation of a Function of a Random Variable}:
+
+\[E[aX] = E[g(X)] = \sum_xg(x) \times f(x) = \sum_x(ax) \times f(x) = a \sum_x x \times f(x) = aE[X].\]
+Likewise, if \(X\) is continuous with PDF \(f\), then by the same Theorem:
+
+\begin{align}
+E[aX] &= E[g(X)] \\
+      &= \int_{-\infty}^{\infty} g(x)f(x)dx \\
+      &= \int_{-\infty}^{\infty} (ax) \times f(x)dx \\
+      &= a \int_{-\infty}^{\infty} x \times f(x)dx \\
+      &= aE[X].
+\end{align}
+
+\end{example}
+
+\begin{definition}[Expectation of a Bivariate Random Vector]
+\protect\hypertarget{def:unlabeled-div-61}{}\label{def:unlabeled-div-61}
+
+For a random vector \((X,Y)\), the \emph{expected value} of \((X,Y)\) is:
+
+\[E[(X,Y)] = (E[X], E[Y]).\]
+Although this definition is rarely used, it illustrates how an operator can be applied to a random vector. More importantly, we can compute the expected value of a function of two random variables, since a function of random variables is itself a random variable.
+
+\end{definition}
+
+\begin{theorem}[Expectation of a Function of Two Random Variables]
+\protect\hypertarget{thm:unlabeled-div-62}{}\label{thm:unlabeled-div-62}
+
+\begin{itemize}
+\tightlist
+\item
+  For discrete random variables \(X\) and \(Y\) with joint PMF \(f\), if \(h\) is a function of \(X\) and \(Y\), then:
+\end{itemize}
+
+\[E[h(X,Y)] = \sum_x\sum_yh(x,y)f(x,y).\]
+* For continuous random variables \(X\) and \(Y\) with joint PDF \(f\), if \(h\) is a function of \(X\) and \(Y\), then:
+
+\[E[h(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(x,y)f(x,y)dydx.\]
+
+\end{theorem}
+
+\begin{theorem}[Linearity of Expectations]
+\protect\hypertarget{thm:unlabeled-div-63}{}\label{thm:unlabeled-div-63}
+
+Let \(X\) and \(Y\) be random variables (discrete or continuous). Then, \(\forall a,b,c \in \mathbb{R}\),
+
+\[E[aX + bY + c] = aE[X] + bE[Y] + c.\]
+
+\end{theorem}
+
+\begin{definition}[$j^{th}$ Raw Moment]
+\protect\hypertarget{def:unlabeled-div-64}{}\label{def:unlabeled-div-64}
+
+For a random variable \(X\) and \(j \in \mathbb{N}\), the \(j_{th}\) \emph{raw moment} of \(X\) is:
+
+\[\mu_j' = E[X^j].\]
+The \(j_{th}\) raw moment of a random variable \(X\) is the expected value of \(X^j\). The expected value is therefore the first raw moment. Raw moments provide summary information about a distribution, describing elements of its shape and location. Sometimes, however, we might seek to have a summary measure that purely reflects the shape and spread of the distribution, and does not depend on its expected value. For \(j > 1\), the \(j_{th}\) \emph{central moment} generally provides more useful information about the spread and shape of a distribution than the regular \(j_{th}\) moment.
+
+\end{definition}
+
+\begin{definition}[$j^{th}$ Central Moment]
+\protect\hypertarget{def:unlabeled-div-65}{}\label{def:unlabeled-div-65}
+
+For a random variable \(X\) and \(j \in \mathbb{N}\), the \(j_{th}\) \emph{central moment} of \(X\) is:
+
+\[\mu_j = E[(X - E[X])^j].\]
+This is referred to as the central moment because it is centered on \(E[X]\). Note that \(E[X]\) is the first raw moment, NOT the first central moment. The first central moment of any distribution is E{[}(X - E{[}X{]}){]} = E{[}X{]} - E{[}X{]} = 0. When E{[}X{]} = 0, then all raw and central moments agree. The sole distriction between raw and central moments lies in whether or not the expected value of X is subtracted before calculations. One of the most common central moments is the second central moment, also known as the \emph{variance}. Whereas the expected value of a distribution characterizes its location and center, \emph{variance} characterizes its variability or spread. Formally, variance measures the expected value of the squared difference between the observed value \(X\) and its mean. Consequently, higher variance implies greater unpredictability.
+
+\end{definition}
+
+\begin{definition}[Variance]
+\protect\hypertarget{def:unlabeled-div-66}{}\label{def:unlabeled-div-66}
+
+The variance of a random variable \(X\) is:
+
+\[V[X] = E[(X - E[X])^2].\]
+In other words, the variance is the average squared deviation from the expected value.
+
+\end{definition}
+
+\begin{theorem}[Alternative Formula for Variance]
+\protect\hypertarget{thm:unlabeled-div-67}{}\label{thm:unlabeled-div-67}
+
+For a random variable \(X\):
+
+\[V[X] = E[X^2] - E[X]^2.\]
+Notice that E{[}X{]} is a \emph{constant} and is therefore treated as such.
+
+\end{theorem}
+
+\begin{theorem}[Properties of Variance]
+\protect\hypertarget{thm:unlabeled-div-68}{}\label{thm:unlabeled-div-68}
+
+For a random variable \(X\):
+
+\begin{itemize}
+\tightlist
+\item
+  \(\forall c \in \mathbb{R}, V[X + c] = V[X].\)
+\item
+  \(\forall a \in \mathbb{R}, V[aX] = a^2V[X].\)
+\end{itemize}
+
+\end{theorem}
+
+\begin{definition}[Standard Deviation]
+\protect\hypertarget{def:unlabeled-div-69}{}\label{def:unlabeled-div-69}
+
+The standard deviation of a random variable \(X\) is:
+
+\[\sigma[X] = \sqrt{V[X]}.\]
+
+\end{definition}
+
+\begin{definition}[Properties of Standard Deviation]
+\protect\hypertarget{def:unlabeled-div-70}{}\label{def:unlabeled-div-70}
+
+For a random variable \(X\) is:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\forall c \in \mathbb{R}, \sigma[X + c] = \sigma[X].\)
+\item
+  \(\forall a \in \mathbb{R}, \sigma[aX] = \left| a \right|\sigma[X].\)
+\end{itemize}
+
+\end{definition}
+
+\begin{example}[A Fair Die Roll]
+\protect\hypertarget{exm:unlabeled-div-71}{}\label{exm:unlabeled-div-71}
+
+Consider a roll of one fair (six-sided) die. Let \(X\) be the value of the outcome of the die roll. Then:
+
+\begin{align}
+V[X] &= E[X^2] - E[X]^2 \\
+     &= \sum_{x = 1}^6(x^2 \times \frac{1}{6}) - (\sum_{x = 1}^6(x^2 \times \frac{1}{6}))^2 \\
+     &= \frac{91}{6} - (\frac{21}{6})^2 \\
+     &= \frac{35}{12} \\
+     &\approx 2.92.
+\end{align}
+
+So,
+\[\sigma[X] = \sqrt{V[X]} = \sqrt{2.92} \approx 1.71.\]
+
+\end{example}
+
+\begin{theorem}[Chebyshev's Inequality]
+\protect\hypertarget{thm:unlabeled-div-72}{}\label{thm:unlabeled-div-72}
+
+Let \(X\) be a random variable with finite \(\sigma[X] > 0\). Then, \(\forall \epsilon > 0\),
+
+\[Pr[\left| X - E[X] \right| \geq \epsilon \sigma [X]] \leq \frac{1}{\epsilon^2}.\]
+Thus, \emph{Chebyshev's Inequality} allows us to put an upper bound on the probability that a draw from the distribution will be more than a given number of standard deviations from the mean.
+
+\end{theorem}
+
+\begin{definition}[Normal Distribution]
+\protect\hypertarget{def:unlabeled-div-73}{}\label{def:unlabeled-div-73}
+
+A continuous random variable \(X\) follows a normal distribution if it has a PDF:
+
+\[f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}, \forall x \in \mathbb{R},\]
+for some constants \(\mu, \sigma \in \mathbb{R}\) with \(\sigma > 0\). We write \(X \sim N(\mu, \sigma^2)\) to denote that \(X\) follows a normal distribution with parameters \(\mu\) and \(\sigma\). This implies that knowing the mean and standard deviation of a normal distribution tells us everything about the distribution.
+
+\end{definition}
+
+\begin{theorem}[Mean and Standard Deviation of the Normal Distribution]
+\protect\hypertarget{thm:unlabeled-div-74}{}\label{thm:unlabeled-div-74}
+
+If \(X \sim N(\mu, \sigma^2)\), then
+
+\begin{itemize}
+\tightlist
+\item
+  \(E[X] = \mu.\)
+\item
+  \(\sigma[X] = \sigma.\)
+\end{itemize}
+
+The parameters \(\mu\) and \(\sigma\) of a normal distribution are its mean and standard deviation, respectively. A normal distribution is thus uniquely specified by its mean and standard deviation. Furthermore, this is why \(N(0,1)\) is the \emph{standard normal distribution}: it has the ``nice'' properties of being centerd on zero (\(\mu = 0\)) and having a standard deviation (and variance) of 1 (\(\sigma = \sigma^2 = 1\)).
+
+\end{theorem}
+
+\begin{theorem}[Properties of the Normal Distribution]
+\protect\hypertarget{thm:unlabeled-div-75}{}\label{thm:unlabeled-div-75}
+
+Suppose \(X \sim N(\mu_X, \sigma_X^2)\) and \(Y \sim N(\mu_Y, \sigma_Y^2)\), then
+
+\begin{itemize}
+\tightlist
+\item
+  \(\forall a,b \in \mathbb{R}\) with \(a \neq 0\), if \(W = aX + b\), then \(W \sim N(a\mu_x + b, a^2 \sigma_X^2).\)
+\item
+  If \(X \perp \!\!\! \perp Y\) and \(Z = X + Y\), then \(Z \sim N(\mu_X + \mu_Y, \sigma_X^2 + \sigma_Y^2).\)
+\end{itemize}
+
+This theorem implies that any linear combination of any number of mutually independent normal random variables must itself be normal.
+
+\end{theorem}
+
+\begin{definition}[Mean Squared Error (MSE) about c]
+\protect\hypertarget{def:unlabeled-div-76}{}\label{def:unlabeled-div-76}
+
+For a random variable \(X\) and \(c \in \mathbb{R}\), the mean squared error of \(X\) about \(c\) is \(E[(X-c)^2].\)
+
+\end{definition}
+
+\begin{theorem}[Alternative Formula for MSE]
+\protect\hypertarget{thm:unlabeled-div-77}{}\label{thm:unlabeled-div-77}
+
+For a random variable \(X\) and \(c \in \mathbb{R}\),
+
+\[E[(X-c)^2] = V[X] + (E[X] - c)^2.\]
+Proof:
+
+\begin{align}
+E[(X-c)^2] &= E[X^2 -2cX + c^2] \\
+           &= E[X^2] - 2cE[X] + c^2 \\
+           &= E[X^2] - E[X]^2 + E[X]^2 - 2cE[X] + c^2 \\
+           &= (E[X^2] - E[X]^2) + (E[X]^2- 2cE[X] + c^2) \\
+           &= V[X] + (E[X] - c)^2. \\
+\end{align}
+
+\end{theorem}
+
+\begin{theorem}[The Expected Value Minimizes MSE]
+\protect\hypertarget{thm:unlabeled-div-78}{}\label{thm:unlabeled-div-78}
+
+For a random variable \(X\), the value of \(c\) that minimizes the MSE of \(X\) about \(c\) is \(c = E[X]\).
+
+Proof:
+
+\begin{align}
+argmin_{c \in \mathbb{R}}E[(X - c)^2] &= argmin_{c \in \mathbb{R}}(V[X] + (E[X] - c)^2) \\
+                                      &= argmin_{c \in \mathbb{R}}(E[X] - c)^2 \\
+                                      &= E[X].
+\end{align}
+
+In other words, if we had to pick one number as a prediction of the value of \(X\), the ``best'' choice (in terms of minimizing MSE) would be E{[}X{]}.
+
+\end{theorem}
+
+\begin{example}[A Fair Coin Flip]
+\protect\hypertarget{exm:unlabeled-div-79}{}\label{exm:unlabeled-div-79}
+
+Consider a fair coin flip. Let \(X=0\) if the coin comes up heads and \(X=1\) if the coin comes up tails. What is the minimum MSE guess for the value of \(X\)? The PMF of \(X\) is:
+
+\[
+f(x) =
+\begin{cases}
+  \frac{1}{2} &: x \in \{0,1\} \\
+  0 &: otherwise.
+\end{cases}
+\]
+So the MSE about \(c\) is:
+
+\begin{align}
+E[(X-c)^2] &= \frac{1}{2}(0-c)^2 + \frac{1}{2}(1-c)^2 \\
+           &= \frac{1}{2}(c^2 + 1 + c^2 - 2c) \\
+           &= \frac{1}{2}(1 + 2c^2 - 2c) \\
+           &= \frac{1}{2} + c^2 - c.
+\end{align}
+
+The first-order condition is thus:
+
+\[0 = \frac{d}{dc}E[(X -c)^2] = \frac{d}{dc}(\frac{1}{2} + c^2 - c) = 2c - 1,\]
+which is solved by \(c = \frac{1}{2}\). This is E{[}X{]}.
+
+\end{example}
+
+\begin{definition}[Covariance]
+\protect\hypertarget{def:unlabeled-div-80}{}\label{def:unlabeled-div-80}
+
+The covariance of two random variables \(X\) and \(Y\) is:
+
+\[Cov[X,Y] = E[(X - E[X]) (Y - E[Y])].\]
+
+\end{definition}
+
+\begin{theorem}[Alternative Formula for Covariance]
+\protect\hypertarget{thm:unlabeled-div-81}{}\label{thm:unlabeled-div-81}
+
+For random variables \(X\) and \(Y\):
+
+\[Cov[X,Y] = E[XY] - E[X]E[Y].\]
+Proof:
+
+\begin{align}
+Cov[X,Y] &= E[(X - E[X]) (Y - E[Y])] \\
+         &= E[XY - XE[Y] - YE[X] + E[X]E[Y]] \\
+         &= E[XY] - E[X]E[Y] - E[X]E[Y] + E[X]E[Y] \\
+         &= E[XY] - E[X]E[Y].
+\end{align}
+
+\end{theorem}
+
+\begin{theorem}[Variance Rule]
+\protect\hypertarget{thm:unlabeled-div-82}{}\label{thm:unlabeled-div-82}
+
+Let \(X\) and \(Y\) be random variables. Then:
+
+\[V[X + Y] = V[X] + 2Cov[X,Y] + V[Y].\]
+More generally, \(\forall a,b,c \in \mathbb{R}\):
+
+\[V[aX + bY + c] = a^2V[X] + 2abCov[X,Y] + b^2V[Y].\]
+Note that, unlike expected values, we do NOT have linearity of variances: \(V[aX + bY] \neq aV[X] + bV[Y].\)
+
+\end{theorem}
+
+\begin{theorem}[Properties of Covariance]
+\protect\hypertarget{thm:unlabeled-div-83}{}\label{thm:unlabeled-div-83}
+
+For random variables \(X\), \(Y\), \(Z\), and \(W\):
+
+\begin{itemize}
+\tightlist
+\item
+  \(\forall c,d \in \mathbb{R}\), \(Cov[c,X] = Cov[X,c] = Cov[c,d] = 0.\)
+\item
+  \(Cov[X,Y] = Cov[Y,X].\)
+\item
+  \(Cov[X,X] = V[X].\)
+\item
+  \(\forall a,b,c,d \in \mathbb{R}\), \(Cov[aX + c, bY + d] = abCov[X,Y].\)
+\item
+  \(Cov[X + W, Y + Z] = Cov[X,Y] + Cov[X,Z] + Cov[W,Y] + Cov[W,Z].\)
+\end{itemize}
+
+\end{theorem}
+
+\begin{definition}[Correlation]
+\protect\hypertarget{def:unlabeled-div-84}{}\label{def:unlabeled-div-84}
+
+The correlation of two random variables \(X\) and \(Y\) with \(\sigma[X] > 0\) and \(\sigma[Y] > 0\) is:
+
+\[\rho[X,Y] = \frac{Cov[X,Y]}{\sigma[X]\sigma[Y]}.\]
+
+\end{definition}
+
+\begin{theorem}[Correlation and Linear Dependence]
+\protect\hypertarget{thm:unlabeled-div-85}{}\label{thm:unlabeled-div-85}
+
+For random variables \(X\) and \(Y\):
+
+\begin{itemize}
+\tightlist
+\item
+  \(\rho[X,Y] \in [-1,1].\)
+\item
+  \(\rho[X,Y] = 1 \iff \exists a,b \in \mathbb{R}\) with \(b > 0\) such that \(Y = a + bX.\)
+\item
+  \(\rho[X,Y] = -11 \iff \exists a,b \in \mathbb{R}\) with \(b > 0\) such that \(Y = a - bX.\)
+\end{itemize}
+
+\end{theorem}
+
+\begin{theorem}[Properties of Correlation]
+\protect\hypertarget{thm:unlabeled-div-86}{}\label{thm:unlabeled-div-86}
+
+For random variables \(X\), \(Y\), and \(Z\):
+
+\begin{itemize}
+\tightlist
+\item
+  \(\rho[X,Y] = \rho[Y,X].\)
+\item
+  \(\rho[X,X] = 1.\)
+\item
+  \(\rho[aX + c, bY + d] = \rho[X,Y], \forall a,b,c,d \in \mathbb{R}\) such that either \(a,b > 0\) or \(a,b < 0.\)
+\item
+  \(\rho[aX + c, bY + d] = \rho[X,Y], \forall a,b,c,d \in \mathbb{R}\) such that either \(a < 0 < b\) or \(b < 0 < a.\)
+\end{itemize}
+
+\end{theorem}
+
+\begin{theorem}[Implications of Independence (Part II)]
+\protect\hypertarget{thm:unlabeled-div-87}{}\label{thm:unlabeled-div-87}
+
+If \(X\) and \(Y\) are independent random variables, then:
+
+\begin{itemize}
+\tightlist
+\item
+  \(E[XY] = E[X]E[Y].\)
+\item
+  Covariance is zero: \(Cov[X,Y] = 0.\)
+\item
+  Correlation is zero: \(\rho[X,Y] = 0.\)
+\item
+  Variances are additive: \(V[X + Y] = V[X] + V[Y].\)
+\end{itemize}
+
+\end{theorem}
+
+\begin{definition}[Conditional Expectation]
+\protect\hypertarget{def:unlabeled-div-88}{}\label{def:unlabeled-div-88}
+
+For discrete random variables \(X\) and \(Y\) with joint PMF, \(f\), the conditional expectation of \(Y\) given \(X=x\) is:
+
+\[E[Y|X=x] = \sum_y yf_{Y|X}, \forall x \in Supp[X].\]
+For jointly continuous random variables \(X\) and \(Y\) with joint PDF, \(f\), the conditional expectation of \(Y\) given \(X=x\) is:
+
+\[E[Y|X=x] = \int_{-\infty}^{\infty}yf_{Y|X}dy, \forall x \in Supp[X].\]
+
+\end{definition}
+
+\begin{theorem}[Conditional Expectation of a Function of Random Variables]
+\protect\hypertarget{thm:unlabeled-div-89}{}\label{thm:unlabeled-div-89}
+
+For discrete random variables \(X\) and \(Y\) with joint PMF, \(f\), if \(h\) is a function of \(X\) and \(Y\), then the conditional expectation of \(h(X,Y)\) given \(X=x\) is:
+
+\[E[h(X,Y) | X=x] = \sum_yh(x,y)f_{Y|X}(y|x), \forall x \in Supp[X].\]
+For jointly continuous random variables \(X\) and \(Y\) with joint PDF, \(f\), if \(h\) is a function of \(X\) and \(Y\), then the conditional expectation of \(h(X,Y)\) given \(X=x\) is:
+
+\[E[h(X,Y) | X=x] = \int_{-\infty}^{\infty}h(x,y)f_{Y|X}(y|x)dy, \forall x \in Supp[X].\]
+
+\end{theorem}
+
+\begin{definition}[Conditional Variance]
+\protect\hypertarget{def:unlabeled-div-90}{}\label{def:unlabeled-div-90}
+
+For random variables \(X\) and \(Y\), the conditional variance of \(Y\) given \(X=x\) is:
+
+\[V[Y | X=x] = E[(Y - E[Y | X=x])^2 | X=x], \forall x \in Supp[X].\]
+
+\end{definition}
+
+\begin{theorem}[Alternative Formula for Conditional Variance]
+\protect\hypertarget{thm:unlabeled-div-91}{}\label{thm:unlabeled-div-91}
+
+For random variables \(X\) and \(Y\), \(\forall x \in Supp[X]\):
+
+\[V[Y | X=x] = E[Y^2 | X=x] - E[Y | X=x]^2.\]
+
+\end{theorem}
+
+\begin{theorem}[Linearity of Conditional Expectations]
+\protect\hypertarget{thm:unlabeled-div-92}{}\label{thm:unlabeled-div-92}
+
+For random variables \(X\) and \(Y\), if \(g\) and \(h\) are functions of \(X\), then \(\forall x \in Supp[X]\):
+
+\[E[g(X)Y+h(X) | X=x] = g(x)E[Y | X=x] + h(x).\]
+
+\end{theorem}
+
+\begin{proof}[Linearity of Conditional Expectations]
+
+Let \(X\) and \(Y\) be either discrete random variables with joint PMF, \(f\), or jointly continuous random variables with joint PDF, \(f\), and let \(g\) and \(h\) be functions of \(X\).
+
+If \(X\) and \(Y\) are discrete, then \(\forall x \in Supp[X]\):
+
+\begin{align}
+E[g(X)Y+h(X) | X=x] &= \sum_y (g(x)y + h(x)) \times f_{Y|X}(y|x) \\
+                    &= g(x) \sum_y yf_{Y|X}(y|x) + h(x) \sum_y f_{Y|X}(y|x) \\
+                    &= g(x)E[Y | X=x] + h(x)(1) \\
+                    &= g(x)E[Y | X=x] + h(x) \\
+                    &= g(X)E[Y|X] + h(X).
+\end{align}
+
+Likewise, if \(X\) and \(Y\) are jointly continuous, then \(\forall x \in Supp[X]\):
+
+\begin{align}
+E[g(X)Y+h(X) | X=x] &= \int_{-\infty}^{\infty} (g(x)y + h(x)) \times f_{Y|X}(y|x) \\
+                    &= g(x) \int_{-\infty}^{\infty} yf_{Y|X}(y|x) + h(x) \int_{-\infty}^{\infty} f_{Y|X}(y|x) \\
+                    &= g(x)E[Y | X=x] + h(x)(1) \\
+                    &= g(x)E[Y | X=x] + h(x). \\
+                    &= g(X)E[Y|X] + h(X).
+\end{align}
+
+\end{proof}
+
+\begin{definition}[Conditional Expectation Function (CEF)]
+\protect\hypertarget{def:unlabeled-div-94}{}\label{def:unlabeled-div-94}
+
+For random variables \(X\) and \(Y\) with joint PMF/PDF, \(f\), the conditional expectation function of \(Y\) given \(X=x\) is:
+
+\[G_Y(x) = E[Y | X=x], \forall x \in Supp[X].\]
+The CEF is a \emph{univariate function} that maps \(x\) to \(E[Y | X=x]\). For example, if \(X\) is a Bernoulli random variable, then the CEF of \(Y\) given \(X\) is:
+
+\[G_Y(x) = E[Y | X=x] = \begin{cases} E[Y | X=0] &: x=0 \\ E[Y |X=1] &: x=1. \end{cases}\]
+\(G_Y(X)\) is a function of the random variable \(X\) and is therefore itself a random variable whose value depends on the value of \(X\). That is, when \(X\) takes on the value \(x\), the random variable \(G_Y(X)\) takes on the value \(G_Y(x) = E[Y | X=x].\) We write \(E[Y|X]\) to denote \(G_Y(X)\) since \(E[Y | X=X]\) would be confusing.
+
+\end{definition}
+
+\begin{definition}[Conditional Variance Function (CVF)]
+\protect\hypertarget{def:unlabeled-div-95}{}\label{def:unlabeled-div-95}
+
+For random variables \(X\) and \(Y\) with joint PMF/PDF, \(f\), the conditional variance function of \(Y\) given \(X=x\) is:
+
+\[H_Y(x) = V[Y | X=x], \forall x \in Supp[X].\]
+
+\end{definition}
+
+\begin{example}[Flipping a Coin and Rolling a Die]
+\protect\hypertarget{exm:unlabeled-div-96}{}\label{exm:unlabeled-div-96}
+
+Consider again the generative process from previous examples where the conditional PMF of \(Y\) given \(X=x\) is:
+\[f_{Y|X}(y|x) = \begin{cases}\frac{1}{4} &: x=0, y \in \{1,2,3,4\} \\ \frac{1}{6} &: x=1, y \in \{1,2,3,4,5,6\} \\ 0 &: otherwise. \end{cases}\]
+
+Thus, the CEF of \(Y\) given \(X=x\) is:
+
+\begin{align}
+E[Y | X=x] &= \sum_y yf_{Y|X}(y|x) \\
+           &= \begin{cases} \sum_{y=1}^4 y \times \frac{1}{4} &: x=0 \\ 
+                            \sum_{y=1}^6 y \times \frac{1}{6} &: x=1
+                            \end{cases} \\
+           &= \begin{cases} \frac{5}{2} &: x=0 \\ 
+                            \frac{7}{2} &: x=1.
+                            \end{cases}
+\end{align}
+
+Likewise the conditional PMF of \(X\) given \(Y=y\) is:
+\[f_{X|Y}(x|y) = \begin{cases}\frac{3}{5} &: x=0, y \in \{1,2,3,4\} \\ \frac{2}{5} &: x=1, y \in \{1,2,3,4\} \\ 1 &: x=1, y \in \{5,6\} \\ 0 &: otherwise. \end{cases}\]
+So the CEF of \(X\) given \(Y=y\) is:
+
+\begin{align}
+E[X | Y=y] &= \sum_x xf_{X|Y}(x|y) \\
+           &= \begin{cases} 0 \times \frac{3}{5} + 1 \times \frac{2}{5} &: y \in \{1,2,3,4\} \\ 
+                            0 \times 1 + 1 \times 1 &: y \in \{5,6\}
+                            \end{cases} \\
+           &= \begin{cases} \frac{2}{5} &:  y \in \{1,2,3,4\} \\ 
+                            1 &: y \in \{5,6\}. 
+                            \end{cases}
+\end{align}
+
+\end{example}
+
+\begin{theorem}[Law of Iterated Expectations]
+\protect\hypertarget{thm:unlabeled-div-97}{}\label{thm:unlabeled-div-97}
+
+For random variables \(X\) and \(Y\),
+
+\[E[Y] = E[E[Y|X]].\]
+
+\end{theorem}
+
+\begin{proof}[Law of Iterated Expectations]
+
+Let \(X\) and \(Y\) be either two discrete random variables with joint PMF, \(f\), or two jointly continuous random variables with joint PDF, \(f\).
+
+If \(X\) and \(Y\) are discrete, then
+
+\begin{align}
+E[Y] &= \sum_y yf_Y(y) \\
+     &= \sum_y y \sum_x f(x,y) \\
+     &= \sum_x \sum_y yf(x,y) \\
+     &= \sum_x \sum_y yf_{Y|X}(y|x)f_X(x) \\
+     &= \sum_x (\sum_y yf_{Y|X}(y|x))f_X(x) \\
+     &= \sum_x (E[Y | X=x])f_X(x) \\
+     &= E[E[Y | X]].
+\end{align}
+
+Likewise, if \(X\) and \(Y\) are jointly continuous, then
+
+\begin{align}
+E[Y] &= \int_{-\infty}^{\infty} yf_Y(y)dy \\
+     &= \int_{-\infty}^{\infty} y (\int_{-\infty}^{\infty} f_{XY}(x,y)dx) dy \\
+     &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} yf_{XY}(x,y)dydx \\
+     &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} yf_{Y|X}(y|x) f_X(x)dydx \\
+     &= \int_{-\infty}^{\infty} (\int_{-\infty}^{\infty} yf_{Y|X}(y|x)dy) f_X(x)dx \\
+     &= \int_{-\infty}^{\infty} (E[Y | X=x]) f_X(x)dx \\
+     &= E[E[Y | X]].
+\end{align}
+
+\end{proof}
+
+\begin{theorem}[Law of Total Variance]
+\protect\hypertarget{thm:unlabeled-div-99}{}\label{thm:unlabeled-div-99}
+
+For random variables \(X\) and \(Y\),
+
+\[V[Y] = E[V[Y | X]] + V[E[Y | X]].\]
+
+\end{theorem}
+
+\begin{proof}[Law of Total Variance]
+
+For random variables \(X\) and \(Y\),
+
+\begin{align}
+V[Y] &= E[Y^2] - E[Y]^2 \\
+     &= E[E[Y^2 | X]] - E[E[Y | X]]^2 \\
+     &= E[E[Y^2 | X] - E[Y | X]^2 + E[Y | X]^2] - E[E[Y | X]]^2 \\
+     &= E[V[Y | X] + E[Y | X]^2] - E[E[Y | X]]^2 \\
+     &= E[V[Y | X]] + (E[E[Y | X]^2] - E[E[Y | X]]^2) \\
+     &= E[V[Y | X]] + V[E[Y | X]].
+
+\end{align}
+
+\end{proof}
+
+\begin{theorem}[Properties of Deviations from the CEF]
+\protect\hypertarget{thm:unlabeled-div-101}{}\label{thm:unlabeled-div-101}
+
+Let \(X\) and \(Y\) be random variables and let \(\epsilon = Y - E[Y | X]\). Then,
+
+\begin{itemize}
+\tightlist
+\item
+  \(E[\epsilon | X] = 0\).
+\item
+  \(E[\epsilon] = 0\).
+\item
+  If \(g\) is a function of \(X\), then \(Cov[g(X), \epsilon] = 0\).
+\item
+  \(V[\epsilon | X] = V[Y | X]\).
+\item
+  \(V[\epsilon] = E[V[Y | X]]\).
+\end{itemize}
+
+\end{theorem}
+
+\end{document}
