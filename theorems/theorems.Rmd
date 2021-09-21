@@ -1147,3 +1147,246 @@ Where the third and fifth lines follow from properties of deviations from the CE
 $$E[U^2] = E[E[U^2|W]] = E[V[Y|X] + W^2] = E[V[Y|X]] + E[W^2].$$
 $E[V[Y|X]]$ does not depend on the choice of $g(X)$. Additionally, $E[W^2] \geq 0$, with equality if $g(X) = E[Y|X]$. Therefore, choosing $g(X) = E[Y|X]$ minimizes MSE.
 :::
+
+
+::: {.theorem name="Best Linear Predictor (BLP)"}
+For random variables $X$ and $Y$, if $V[X] > 0$, then the best (minimum MSE) linear predictor of $Y$ given $X$ is $g(X) = \alpha + \beta X$, where
+
+$$\alpha = E[Y] - \frac{Cov[X,Y]}{V[X]}E[X],$$
+$$\beta = \frac{Cov[X,Y]}{V[X]}.$$
+Note that $\alpha$ is the y-intercept of the BLP, and $\beta$ is its slope. We note two important corollaries:
+
+* The BLP is also the best linear approximation of the CEF; setting $a = \alpha$ and $b = \beta$ minimizes: $E[(E[Y|X] - (a + bX))^2].$
+* If the CEF is linear, then the CEF is the BLP.
+:::
+
+
+::: {.theorem name="Properties of Deviations from the BLP"}
+Let $X$ and $Y$ be random variables and let $\epsilon = Y - g(X)$, where $g(X)$ is the BLP. Then,
+
+* $E[\epsilon] = 0$.
+* $E[X\epsilon] = 0$.
+* $Cov[X, \epsilon] = 0$.
+:::
+
+
+::: {.theorem name="Implications of Independence (Part III)"}
+If $X$ and $Y$ are independent random variables, then
+
+* $E[Y|X] = E[Y].$
+* $V[Y|X] = V[Y].$
+* The BLP of $Y$ given $X$ is $E[Y].$
+* If $g$ is a function of $X$ and $h$ is a function of $Y$, then 
+  * $E[g(Y) | h(X)] = E[g(Y)].$
+  * The BLP of $h(Y)$ given $g(X)$ is $E[h(Y)].$
+:::
+
+
+::: {.definition name="Covariance Matrix"}
+For a random vector $X$ of length $K$, the covariance matrix $V[X]$ is a matrix whose $(k,k')^{th}$ entry is $Cov[X_{[k]}, X_{[k']}], \forall i,j \in \{1,2,...,K\}$. That is,
+
+$$
+V[X] = 
+\left(\begin{array}{cc} 
+
+V[X_{[1]}] & V[X_{[1]}, X_{[2]}] & ... & V[X_{[1]}, X_{[K]}] \\
+V[X_{[2]}, X_{[1]}] & V[X_{[2]}] & ... & V[X_{[2]}, X_{[K]}] \\
+... & ... & ... & ... \\
+V[X_{[K]}, X_{[1]}] & V[X_{[K]}, X_{[2]}] & ... & V[X_{[K]}] \\
+
+\end{array}\right)
+$$
+:::
+
+
+::: {.theorem name="Multivariate Variance Rule"}
+For random variables $X_{[1]}, X_{[2]},..., X_{[K]}$,
+
+$$V[X_{[1]} + X_{[2]} + ... + X_{[K]}] = V[\sum_{k=1}^K X_{[K]}] = \sum_{k=1}^K \sum_{k'=1}^K Cov[X_{[k]}, X_{[k']}].$$
+:::
+
+
+::: {.definition name="Conditional Expectation (Multivariate Case)"}
+For discrete random variables $X_{[1]}, X_{[2]},..., X_{[K]}$, and $Y$ with joint PMF, $f$, the conditional expectation of $Y$ given $X=x$ is:
+
+$$E[Y|X=x] = \sum_y f_{Y|X} (y|x), \forall x \in Supp[X].$$
+
+For jointly continuous random variables $X_{[1]}, X_{[2]},..., X_{[K]}$, and $Y$ with joint PDF, $f$, the conditional expectation of $Y$ given $X=x$ is:
+
+$$E[Y|X=x] = \int_{-\infty}^{\infty} f_{Y|X} (y|x)dy, \forall x \in Supp[X].$$
+:::
+
+
+::: {.definition name="CEF (Multivariate Case)"}
+For random variables $X_{[1]}, X_{[2]},..., X_{[K]}$, and $Y$ with joint PMF/PDF, $f$, the CEF of $Y$ given $X=x$ is:
+
+$$G_Y(x) = E[Y|X=x], \forall x \in Supp[X].$$
+:::
+
+
+::: {.theorem name="The CEF is the minimum MSE Predictor"}
+For random variables $X_{[1]}, X_{[2]},..., X_{[K]}$, and $Y$ the CEF, $E[Y|X]$, is the best (minimum MSE) predictor of $Y$ given $X$.
+:::
+
+
+::: {.theorem name="Coefficients of the BLP are Partial Derivatives"}
+For random variables $X_{[1]}, X_{[2]},..., X_{[K]}$, and $Y$ if $g(X)$ is the best linear predictor of $Y$ given $X$, then $\forall k \in \{1,2,...,K\}$,
+
+$$\beta_k = \frac{dg(X)}{dX_{[k]}}.$$
+:::
+
+
+::: {.theorem name="Properties of Deviations from the BLP (Multivariate Case)"}
+For random variables $X_{[1]}, X_{[2]},..., X_{[K]}$, and $Y$ if $g(X)$ is the best linear predictor of $Y$ given $X$, then $\forall k \in \{1,2,...,K\}$ and $\epsilon = Y - g(X)$, then
+
+* $E[\epsilon] = 0.$
+* $\forall k \in \{1,2,...,K\}, E[X_{[k]}\epsilon] = 0.$
+* $\forall k \in \{1,2,...,K\}, Cov[X_{[k]}, \epsilon] = 0.$
+:::
+
+
+
+# Statistics
+
+::: {.definition name="Independent and Identically Distributed (i.i.d)"}
+Let $X_1, X_2, ..., X_n$ be random variables with CDFs $F_1, F_2, ..., F_n$, respectively. Let $F_A$ denote the joint CDF of the random variables with indices in the set $A$. Then $X_1, X_2, ..., X_n$ are independent and identically distributed if they satisfy the following:
+
+* Mutually independent: $\forall A \subseteq \{1,2,...,n\}, \forall \{x_1,x_2,...,x_n\} \in \mathbb{R}^n, F_A((x_i)_{i \in A}) = \prod_{i \in A}F_i(x_i).$
+* Identically distributed: $\forall i,j \in \{1,2,...,n\}$ and $\forall x \in \mathbb{R}, F_i(x) = F_j(x).$
+
+In other words, we take a draw from the random variable $X$. Then we take another draw of $X$ in such a manner that our second draw does not depend on the outcome of the first. We repeat this process until we have $n$ draws. So, we have $n$ identical random variables that generate $n$ values.
+:::
+
+
+::: {.definition name="Finite Population Mass Function"}
+Given a finite population $U$ with responses $x_1, x_2, ..., x_N$ the finite population mass function,
+
+$$f_{FP}(x) = \frac{1}{N}\sum_{i=1}^NI(x_i = x).$$
+
+That is, $f_{FP}(x)$ is the proportion of units in $U$ that have $x_i=x$. Let $X$ denote the set of unique values of $x_i$, that is $X=\{x \in \mathbb{R}: f_{FP}(x) > 0\}$.
+
+Let $\mu$ denote the population mean of $U$:
+
+$$\mu = \frac{1}{N}\sum_{i=1}^Nx_i = \sum_{x \in X}xf_{FP}(x).$$
+
+Let $\sigma^2$ denote the population variance of $U$:
+
+$$\sigma^2 = \frac{1}{N}\sum_{i=1}^N(x_i - \mu)^2 = \sum_{x \in X}(x - \mu)^2f_{FP}(x).$$
+:::
+
+
+::: {.definition name="Sample Statistic"}
+For i.i.d. random variables $X_1, X_2, ..., X_n$, a sample statistic is a function of $X_1, X_2, ..., X_n$:
+
+$$T_{(n)} = h_{(n)}(X_1, X_2, ..., X_n),$$
+where $h_{(n)}: \mathbb{R}^n \to \mathbb{R}, \forall n \in \mathbb{N}.$
+:::
+
+
+::: {.definition name="Sample Mean"}
+The sample mean of $n$ draws from $X$ can be viewed as an approximation of $E[X]$. It is the average of all the observed values of $X$. For i.i.d. random variables $X_1, X_2, ..., X_n$, the sample mean is
+
+$$\bar{X} = \frac{X_1 + X_2 + ... + X_n}{n} = \frac{1}{n}\sum_{i=1}^nX_i.$$
+Keep in mind that the sample mean is a sample statistic and thus is itself a random variable. Depending on the outcomes of the random variables $X_1, X_2, ..., X_n$, $\bar{X}$ will take on different values.
+:::
+
+
+::: {.theorem name="The Expected Value of the Sample Mean is the Population Mean"}
+The sample mean tends to approximate the population mean, in the sense that "on average" the value of $\bar{X}$ is $E[X]$. For i.i.d. random variables $X_1, X_2, ..., X_n$,
+
+$$E[\bar{X}] = E[X].$$
+:::
+
+
+::: {.theorem name="Sampling Variance of the Sample Mean"}
+As $\bar{X}$ is a random variable, we can describe other features of its distribution. The variance of $\bar{X}$ is known as the sampling variance of the sample mean. Much as the variance characterizes the variability of a random variable $X$, the sampling variance of the sample mean characterizes how much variability we can expect in the sample mean across hypothetical draws of $n$ observations. For i.i.d. random variables $X_1, X_2, ..., X_n$, with finite variance $V[X]$, the sampling variance of $\bar{X}$ is:
+
+$$V[\bar{X}] = \frac{V[X]}{n}.$$
+Notice that the sampling variance decreases as $n$ increases.
+:::
+
+
+::: {.theorem name="Chebyshev's Inequality for the Sample Mean"}
+Let $X_1, X_2, ..., X_n$ be i.i.d. random variables with finite variance $V[X] > 0$. Then $\forall \epsilon > 0$,
+
+$$Pr[\left| \bar{X} - E[X] \right| \geq \epsilon] \leq \frac{V[X]}{\epsilon^2n}.$$
+:::
+
+
+::: {.definition name="Convergence in Probability"}
+Let ($T_{(1)}, T_{(2)}, T_{(3)}...$) be a sequence of random variables and let $c \in \mathbb{R}$. Then $T_{(n)}$ converges in probability to $c$ if $\forall \epsilon > 0$,
+
+$$\lim_{n \to \infty} Pr[\left| T_{(n)} - c \right| \geq \epsilon] = 0,$$
+or equivalently,
+
+$$\lim_{n \to \infty} Pr[\left| T_{(n)} - c \right| < \epsilon] = 1.$$
+
+We write $T_{(n)} \to^p c$ to denote that $T_{(n)}$ converges in probability to $c$. The value $c$ to which a sequence of random variables converges in probability is referred to as the probability limit of $T_{(n)}$. Saying that $T_{(n)}$ converges in probability to $c$ means that as $n$ gets large, it becomes increasingly likely that $T_{(n)}$ will be "close" to $c$. 
+:::
+
+
+::: {.theorem name="Continuous Mapping Theorem (CMT)"}
+Let ($S_{(1)}, S_{(2)}, S_{(3)}...$) and ($T_{(1)}, T_{(2)}, T_{(3)}...$) be sequences of random variables. Let $g: \mathbb{R}^2 \to \mathbb{R}$ be a continuous function and let $a,b \in \mathbb{R}$. If $S_{(n)} \to^p a$ and $T_{(n)} \to^p b$, then $g(S_{(n)}, T_{(n)}) \to^p g(a,b).$
+
+The CMT says that continuous functions preserve convergence in probability. It also applies to functions of a single random variable and functions of more than two random variables. The CMT will be useful when we seek to generalize to sample statistics other than the sample mean. 
+:::
+
+
+::: {.theorem name="Weak Law of Large Numbers (WLLN)"}
+Let $X_1, X_2, ..., X_n$ be i.i.d. random variables with finite variance $V[X] > 0$, and let $\bar{X}_{(n)} = \frac{1}{n}\sum_{i=1}^n X_i.$ Then,
+
+$$\bar{X}_{(n)} \to^p E[X].$$
+The WLLN says that as $n$ gets large, the sample mean $\bar{X}$ becomes increasingly likely to approximate $E[X]$ to any arbitrary degree of precision. That is, with a large enough sample, the probability that the sample mean will be far from the population mean will be negligible. The generality of the WLLN shows how the sample mean can be used to estimate the CDF at any point. 
+:::
+
+
+::: {.theorem name="Estimating the CDF"}
+Let $X_1, X_2, ..., X_n$ be i.i.d. random variables with common CDF $F$. Let $x \in \mathbb{R}$ and let $Z_i = I(X_i \leq x), \forall i \in \{1,2,...,n\}$, where I() is the indicator function, that is, it takes the value one if its argument is true and zero if it is false. Then,
+
+$$\bar{Z} \to^p E[Z] = F(x).$$
+:::
+
+
+::: {.definition name="Unbiasedness"}
+An estimator $\hat{\theta}$ is unbiased for $\theta$ if $E[\hat{\theta}] = 0$. An unbiased estimator gets the right answer "on average." 
+:::
+
+
+::: {.definition name="Bias of an Estimator"}
+For an estimator $\hat{\theta}$, the bias of $\hat{\theta}$ is $E[\hat{\theta}] - \theta$. The bias tells us the difference between the "average" value of the estimator and the true value of $\theta$. 
+:::
+
+
+::: {.definition name="Sampling Variance of an Estimator"}
+The variance of an estimator is called the sampling variance. For an estimator $\hat{\theta}$, the sampling variance of $\hat{\theta}$ is $V[\hat{\theta}]$. For example, we would say that the sampling variance of the sample mean $\bar{X}$ is $\frac{V[X]}{n}$.
+:::
+
+
+::: {.definition name="Standard Error of an Estimator"}
+The standard deviation of an estimator is called the standard error. For an estimator $\hat{\theta}$, the standard error of $\hat{\theta}$ is $\sigma[\hat{\theta}]$. The standard error is a useful metric of variability and will be central to how we make statistical inferences.
+:::
+
+
+::: {.definition name="MSE of an Estimator"}
+For an estimator $\hat{\theta}$, the mean squared error (MSE) of $\hat{\theta}$ in estimating $\theta$ is $E[(\hat{\theta} - \theta)^2]$. The MSE of an estimator is the expected squared deviation of the estimate from the true value.
+:::
+
+
+::: {.definition name="Alternative Formula for the MSE of an Estimator"}
+For an estimator $\hat{\theta}$, 
+
+$$E[(\hat{\theta} - \theta)^2] = V[\hat{\theta}] + (E[\hat{\theta}] - \theta)^2.$$
+The MSE of an estimator is equal to its sampling variance plus the square of its bias. We can thus see why unbiasedness alone is insufficient to ensure that an estimator is sensible: an estimator with zero bias but large sampling variance may often, or even always, be very far off from the true value of $\theta$. All else equal, we prefer estimators with a lower MSE, as that implies that our estimates are better approximations. An estimator that has a lower MSE than another is said to be more efficient.
+:::
+
+
+::: {.definition name="Relative Efficiency"}
+Let $\hat{\theta}_A$ and $\hat{\theta}_B$ be estimators of $\theta$. Then $\hat{\theta}_A$ is more efficient than $\hat{\theta}_B$ if it has a lower MSE.
+:::
+
+
+::: {.definition name="Consistency"}
+Note that the above definitions all implicitly assume some finite sample size $n$. We can also describe that asymptotic properties of an estimator, that is, the properties of $\hat{\theta}$ as $n \to \infty$. The simplest and perhaps more essential of these properties is consistency. An estimator $\hat{\theta}$ is consistent for $\theta$ if $\hat{\theta} \xrightarrow[\text{}]{\text{p}} \theta$. 
+
+Consistency is the notion that if we had enough data, the probability that our estimate $\hat{\theta}$ would be far from the truth $\theta$ would be close to zero. Although unbiased estimators are not necessarily consistent, any unbiased estimator with $lim_{n \to \infty}V[\hat{\theta}] = 0$ is consistent.
+:::
