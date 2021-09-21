@@ -1390,3 +1390,41 @@ Note that the above definitions all implicitly assume some finite sample size $n
 
 Consistency is the notion that if we had enough data, the probability that our estimate $\hat{\theta}$ would be far from the truth $\theta$ would be close to zero. Although unbiased estimators are not necessarily consistent, any unbiased estimator with $lim_{n \to \infty}V[\hat{\theta}] = 0$ is consistent.
 :::
+
+
+::: {.definition name="Plug-In Sample Variance"}
+Let $X_1, X_2, ..., X_n$ be i.i.d. random variables, the plug-in sample variance is $\bar{X^2} - (\bar{X})^2.$ Note that
+
+$$\bar{X^2} = \frac{1}{n}\sum_{i=1}^n X_i^2,$$
+that is, the sample mean of $X^2$, and
+
+$$(\bar{X})^2 = (\frac{1}{n}\sum_{i=1}^n X_i)^2,$$
+that is, the square of the sample mean of X.
+:::
+
+
+::: {.theorem name="Properties of the Plug-In Sample Variance"}
+For i.i.d. random variables $X_1, X_2, ..., X_n$ with finite variance $V[X] > 0$, 
+
+* $E[\bar{X^2} - (\bar{X})^2] = \frac{n-1}{n}V[X].$
+* $\bar{X^2} - (\bar{X})^2 \to^p V[X].$
+
+This theorem says that the plug-in sample variance is not unbiased, but nevertheless converges in probability to the true variance under a mild regularity condition. The size of the bias decreases as n increases (since $\frac{n-1}{n} \to 1$ as $n \to \infty$), so in large samples, it becomes negligible. In this setting, it is also easy to correct for this bias.
+:::
+
+
+::: {.definition name="Unbiased Sample Variance"}
+For i.i.d. random variables $X_1, X_2, ..., X_n$, the unbiased sample variance is
+
+$$\hat{V}[X] = \frac{n}{n-1}(\bar{X^2} - (\bar{X})^2).$$
+:::
+
+
+::: {.theorem name="Properties of the Unbiased Sample Variance"}
+For i.i.d. random variables $X_1, X_2, ..., X_n$ with finite variance $V[X] > 0$,
+
+* $E[\hat{V}[X]] = V[X].$
+* $\hat{V}[X] \to^p V[X].$
+
+As we will see, having a consistent estimator of $V[X]$ will allows us to quantify the uncertainty around the estimate of $E[X]$ given by the sample mean.
+:::
