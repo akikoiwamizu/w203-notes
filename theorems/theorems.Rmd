@@ -1428,3 +1428,45 @@ For i.i.d. random variables $X_1, X_2, ..., X_n$ with finite variance $V[X] > 0$
 
 As we will see, having a consistent estimator of $V[X]$ will allows us to quantify the uncertainty around the estimate of $E[X]$ given by the sample mean.
 :::
+
+
+::: {.definition name="Convergence in Distribution"}
+Let $(T_{(1)}, T_{(2)}, T_{(3)},...)$ be a sequence of random variables with CDFs $(F_{(1)}, F_{(2)}, F_{(3)},...)$, and let $T$ be a random variable with CDF $F$. Then $T_{(n)}$ converges in distribution to $T$ if, $\forall t \in \mathbb{R}$ at which $F$ is continuous,
+
+$$\lim_{n \to \infty}F_{(n)}(t) = F(t).$$
+We write $T_{(n)} \to^d T$ to denote that $T_{(n)}$ converges in distribution to $T$.
+:::
+
+
+::: {.definition name="Standardized Sample Mean"}
+For i.i.d. random variables $X_1, X_2, ..., X_n$ with finite $E[X] = \mu$ and finite variance $V[X] = \sigma^2 > 0$, the standardized sample mean is
+
+$$Z = \frac{(\bar{X} - E[\bar{X}])}{\sigma[\bar{X}]} = \frac{\sqrt{n}(\bar{X} - \mu)}{\sigma}.$$
+:::
+
+
+::: {.theorem name="Estimating the Sampling Variance of the Sample Mean"}
+For i.i.d. random variables $X_1, X_2, ..., X_n$ with finite variance $V[X] > 0$, let $\hat{V}[\bar{X}] = \frac{\hat{V}[X]}{n}.$ Then,
+
+* $E[\hat{V}[X]] = V[\bar{X}].$
+* $n\hat{V}[\bar{X}] - nV[\bar{X}] = n\hat{V}[\bar{X}] - V[X] \to^p 0.$
+
+The first property states that the sampling variance of the sample mean is unbiased, and the second is equivalent to stating that it is consistent (as the limit distribution of the sample mean has variance V[X]). Thus, it is possible to estimate the average of a random variable (the population mean) and, furthermore, to estimate the uncertainty of that estimate.
+:::
+
+
+::: {.definition name="Standard Error of the Sample Mean"}
+For i.i.d. random variables $X_1, X_2, ..., X_n$, the standard error of the sample mean is
+
+$$\sigma[\bar{X}] = \sqrt{V[\bar{X}]}.$$
+To estimate the standard error of the sample mean, we use 
+
+$$\hat{\sigma}[\bar{X}] = \sqrt{\hat{V}[\bar{X}]}.$$
+:::
+
+
+::: {.theorem name="Consistency of the Standard Error of the Sample Mean Estimator"}
+For i.i.d. random variables $X_1, X_2, ..., X_n$ with finite variance $V[X] > 0$,
+
+$$\sqrt{n}\hat{\sigma}[\bar{X}] - \sqrt{V[X]} = \sqrt{n}\hat{\sigma}[\bar{X}] - \sqrt{n}\sigma[\bar{X}] \to^p 0.$$
+:::
