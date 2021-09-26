@@ -1077,9 +1077,9 @@ V[Y] &= E[Y^2] - E[Y]^2 \\
 ::: {.theorem name="Properties of Deviations from the CEF"}
 Let $X$ and $Y$ be random variables and let $\epsilon = Y - E[Y | X]$. Then,
 
+* $E[\epsilon] = 0$. This first moment condition is really about the vertical positioning, is locking us into this one point. 
+* If $g$ is a function of $X$, then $Cov[g(X), \epsilon] = 0$. This second moment condition is about the rotation, it's about the angle of the line.
 * $E[\epsilon | X] = 0$.
-* $E[\epsilon] = 0$.
-* If $g$ is a function of $X$, then $Cov[g(X), \epsilon] = 0$.
 * $V[\epsilon | X] = V[Y | X]$.
 * $V[\epsilon] = E[V[Y | X]]$.
 :::
@@ -1442,6 +1442,29 @@ We write $T_{(n)} \to^d T$ to denote that $T_{(n)}$ converges in distribution to
 For i.i.d. random variables $X_1, X_2, ..., X_n$ with finite $E[X] = \mu$ and finite variance $V[X] = \sigma^2 > 0$, the standardized sample mean is
 
 $$Z = \frac{(\bar{X} - E[\bar{X}])}{\sigma[\bar{X}]} = \frac{\sqrt{n}(\bar{X} - \mu)}{\sigma}.$$
+It can be shown that $E[Z] = 0$ and $V[Z] = \sigma[Z] = 1.$ These convenient properties are the reason why $Z$ is called the standardized sample mean.
+:::
+
+
+::: {.theorem name="Central Limit Theorem (CLT)"}
+Let $X_1, X_2, ..., X_n$ be i.i.d. random variables with finite $E[X] = \mu$ finite variance $V[X] = \sigma^2 > 0$, let $Z$ be the standardized sample mean. Then,
+
+$$Z \to^d N(0,1),$$
+or equivalently,
+
+$$\sqrt{n}(\bar{X} - \mu) \to^d N(0,\sigma^2).$$
+The Central Limit Theorem says that, if $n$ is large, the sampling distribution of the sample mean will tend to be approximately normal even when the population under consideration is not distributed normally. This is useful because it will allow us to rigorously quantify our uncertainty when $n$ is large. 
+:::
+
+
+::: {.theorem name="Slutsky's Theorem"}
+Let ($S_{(1)}, S_{(2)}, S_{(3)}...$) and ($T_{(1)}, T_{(2)}, T_{(3)}...$) be sequences of random variables. Let $T$ be a random variable and $c \in \mathbb{R}$. If $S_{(n)} \to^p c$ and $T_{(n)} \to^d T$, then 
+
+* $S_{(n)} + T_{(n)} \to^d c + T.$
+* $S_{(n)}T_{(n)} \to^d cT.$
+* $\frac{T_{(n)}}{S_{(n)}} \to^d \frac{T}{c}$, provided that $c \neq 0.$
+
+This theorem can be derived from a variant of the Continuous Mapping Theorem. We will often invoke this theorem for the special case in which $S_{(n)}$ is a degenerate random variable, either depending solely on $n$ (for example, $\frac{n}{n-1} \to^p 1$) or just a constant (for example, $c \to^p c$). As the sample size increases, the distribution of the sample mean becomes both bell-shaped and increasingly tightly centered on the population mean. This holds regardless of the particular underlying distribution of $X$, as long as it has finite variance.
 :::
 
 
@@ -1469,4 +1492,43 @@ $$\hat{\sigma}[\bar{X}] = \sqrt{\hat{V}[\bar{X}]}.$$
 For i.i.d. random variables $X_1, X_2, ..., X_n$ with finite variance $V[X] > 0$,
 
 $$\sqrt{n}\hat{\sigma}[\bar{X}] - \sqrt{V[X]} = \sqrt{n}\hat{\sigma}[\bar{X}] - \sqrt{n}\sigma[\bar{X}] \to^p 0.$$
+:::
+
+
+::: {.definition name="Empirical CDF"}
+In general, the CDF of a random variable tells us everything about the behavior of the random variable. The CDF of $X$ is
+
+$$F(x) = Pr[X \leq x] = E[I(X \leq x)].$$
+Accordingly, there is a sample analog to the CDF, called the empirical CDF. For i.i.d. random variables $X_1, X_2, ..., X_n$, the empirical CDF $\hat{F}$ of $X$ is
+
+$$\hat{F}(x) = \overline{I(X \leq x)}, \forall x \in \mathbb{R}.$$
+Just as the CDF is a function that fully describes the population, the empirical CDF is a function that fully describes the sample. Note that the empirical CDF is always a nondecreasing step function, like the CDF of a discrete random variable. There are two (equivalent) ways of thinking about how $\hat{F}(x)$ is computed:
+
+* Replace the expected value in the definition of the CDF with the sample mean.
+* Count the number of observations $i$ satisfying $X_i \leq x$ and divide by $n$.
+
+We know, because of the properties of sample mean, that, $\forall x \in \mathbb{R}, \hat{F}(x)$ will be unbiased and consistent for $F(x)$. Let's take a moment to establish some necessary notation. Let $F$ be the CDF of a random variable $X$ and let $f$ be the corresponding PMF/PDF. Let $g$ be any function of $X$. Then let
+
+$$\int_{-\infty}^{\infty}g(x)dF(x) = \begin{cases} \sum_xg(x)f(x) &: F, discrete \\ \int_{-\infty}^{\infty}g(x)f(x)dx &: F, continuous. \end{cases} $$
+:::
+
+
+::: {.definition name="Statistical Function"}
+A statistical function is an operator on a random variable that is represented by a function of the CDF. It is simply a way to represent a feature of a random variable. A statistical function is a function $T: F \to R$, where $F$ is the set of all possible CDFs. For example, for the random variable $X$ with CDF $F$, we can write the expected value of X as:
+
+$$E[X] = T_E(F) = \int_{-\infty}^{\infty}xdF(x).$$
+Likewise, we can write the variance of $X$ as:
+
+$$\begin{align} V[X] &= T_V(F) \\ &= \int_{-\infty}^{\infty}(x-E[X])^2dF(x) \\ &= \int_{-\infty}^{\infty}x^2dF(x) - E[X]^2 \\ &= \int_{-\infty}^{\infty} x^2dF(x) + (\int_{-\infty}^{\infty}xdF(x))^2. \end{align}$$
+:::
+
+
+::: {.definition name="Plug-In Estimator"}
+For i.i.d. random variables $X_1, X_2, ..., X_n$, with common CDF $F$, the plug-in estimator of $\theta = T(F)$ is:
+
+$$\hat{\theta} = T(\hat{F}).$$
+To estimate $\theta = T(F)$, apply the same function to the empirical CDF. Thus,
+
+$$\hat{E}[X] = \frac{1}{n}\sum_{i=1}^nx = \bar{X},$$
+$$\hat{V}[X] = T_V(\hat{F}) = \overline{X^2} - (\bar{X})^2.$$
 :::
