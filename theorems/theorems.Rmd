@@ -1566,3 +1566,17 @@ $\alpha$ = P($Z \geq c$ when $Z \sim N(0,1)$) = 1 - $\Phi(c) \Rightarrow$
 $\Phi$ = 1 - $\alpha \Rightarrow c = \Phi^{-1}(1 - \alpha) = z_{\alpha}.$ 
 
 Thus, the rejection region $z \geq z_{\alpha}$ has type I error probability $\alpha$.
+
+* We can now modify the one-sample z-test to accommodate the more realistic situation when $\sigma$ is unknown. 
+
+$$T = \frac{\bar{X} - \mu_0}{\frac{S}{\sqrt{n}}}.$$ 
+
+::: {.definition name="Noncentral t Distribution"}
+Let $Z \sim N(0,1)$ and $Y \sim \chi_v^2$ be independent random variables. For any real number $\delta$, the random variable
+
+$$\frac{Z + \delta}{\sqrt{\frac{Y}{v}}}$$
+has a non-central t-distribution with $v$ degrees of freedom and noncentrality parameter $\delta$.
+:::
+
+* For any fixed difference $\mu' - \mu_0$, power increases with sample size. That is, for any fixed departure from $H_0$, a larger sample size will increase the likelihood of correctly detecting that $H_0$ is false and $H_a$ is true.
+* For any fixed sample size, power increases as the "difference" increases (i.e. the distance between $\mu'$ and $\mu_0$ grows.)
