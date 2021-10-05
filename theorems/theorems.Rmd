@@ -1532,3 +1532,37 @@ To estimate $\theta = T(F)$, apply the same function to the empirical CDF. Thus,
 $$\hat{E}[X] = \frac{1}{n}\sum_{i=1}^nx = \bar{X},$$
 $$\hat{V}[X] = T_V(\hat{F}) = \overline{X^2} - (\bar{X})^2.$$
 :::
+
+
+# Hypothesis Testing
+
+### Devore & Berk - Section 9.1
+
+* A **parameter** can be estimated from sample data either by a single number (a point estimate) or an entire interval of plausible values (a confidence interval). 
+* However, the objective of an investigation is not to estimate the parameter, but to decide which of two contradictory claims about the parameter is correct. Methods for accomplishing this comprise the part of statistical inference called **hypothesis testing**.
+* A **statistical hypothesis** is a claim or assertion either about the value of a single parameter (i.e. a characteristic of a population or a probability distribution), about the values of several parameters, or about the form of an entire probability distribution. 
+* The **null hypothesis** (H_0) is the claim that is initially assumed to be true.
+* The **alternative hypothesis** (H_a) is the assertion that is contradictory to H_0
+* The two plausible conclusions from a hypothesis-testing analysis are 1) reject H_0 or 2) fail to reject H_0
+* A **test statistic** is a function of the sample data used to make a decision
+* A **rejection region** is a region consisting of those test statistic values for which H_0 will be rejected in favor of H_a.
+* **Type 1 error** consists of rejecting the null hypothesis when it is true - a type 1 error is often called a **false positive**.
+* **Type 2 error** involves not rejecting the null hypothesis when it is false (i.e. H_a is true) - a type 2 error is often called an **opportunity loss** in business.
+  * Example: Since in the US judicial system the null hypothesis is that the accused is innocent, a type 1 error is the same as convicting an innocent person, while a false acquittal (i.e. letting a guilty person go free) equates to a type 2 error.
+* **Proposition**: Once the test statistic and n are fixed, there is no rejection region that will simultaneously make both type 1 and type 2 errors small.
+  * The approach that most people take is to specify the largest value of type 1 error that can be tolerated and find a rejection region having that value. This makes the type 2 error as small as possible subject to the bound of the type 1 error. The resulting value of the type 1 error is often referred to as the **significance level** of the test.
+  * A test with a significance level alpha is one for which the type 1 error probability is controlled at the specified level.
+* **Power** is defined as the probability that  the test procedure will fail to reject the null hypothesis. Most software packages calculate type 2 error probabilities for a variety of test procedures in terms of power.
+
+### Devore & Berk - Section 9.2
+* Recall that the Z Statistic obtained by standardizing $\bar{X}$ under the assumption that $H_0$ is true:
+
+$$Z = \frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}}.$$
+
+As discussed in the previous section, the cutoff value $c$ should be chosen to control the probability of a type I error at the desired level $\alpha$. This is easily accomplished because the distribution of the test statistic $Z$ when $H_0$ is true is the standard normal distrbution:
+
+$\alpha$ = P(type I error) = P($H_0$ is rejected when $H_0$ is true)
+$\alpha$ = P($Z \geq c$ when $Z \sim N(0,1)$) = 1 - $\Phi(c) \Rightarrow$ 
+$\Phi$ = 1 - $\alpha \Rightarrow c = \Phi^{-1}(1 - \alpha) = z_{\alpha}.$ 
+
+Thus, the rejection region $z \geq z_{\alpha}$ has type I error probability $\alpha$.
