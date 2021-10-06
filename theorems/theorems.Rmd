@@ -1554,6 +1554,7 @@ $$\hat{V}[X] = T_V(\hat{F}) = \overline{X^2} - (\bar{X})^2.$$
   * A test with a significance level alpha is one for which the type 1 error probability is controlled at the specified level.
 * **Power** is defined as the probability that  the test procedure will fail to reject the null hypothesis. Most software packages calculate type 2 error probabilities for a variety of test procedures in terms of power.
 
+
 ### Devore & Berk - Section 9.2
 * Recall that the Z Statistic obtained by standardizing $\bar{X}$ under the assumption that $H_0$ is true:
 
@@ -1580,3 +1581,16 @@ has a non-central t-distribution with $v$ degrees of freedom and noncentrality p
 
 * For any fixed difference $\mu' - \mu_0$, power increases with sample size. That is, for any fixed departure from $H_0$, a larger sample size will increase the likelihood of correctly detecting that $H_0$ is false and $H_a$ is true.
 * For any fixed sample size, power increases as the "difference" increases (i.e. the distance between $\mu'$ and $\mu_0$ grows.)
+
+
+### Devore & Berk - Section 9.4
+* The **p-value** is the probability, calculated assuming that the null hypothesis is true, of obtaining a value of the test statistic at least as contradictory to $H_0$ as the value calculated from the available sample.
+  * The p-value is a probability
+  * This probability is calculated assuming that $H_0$ is true
+  * The p-value is a function of the sample data
+  * To determine the p-value, we must decide which values of the test statistic are "at least as contradictory to $H_0$" as the value obtained from our sample
+* Examples:
+  * P-value = 0.250 means that 25% of all possible test statistic values are more contradictory to $H_0$ than the one that came out of our sample. So our data is not all that contradictory to the null hypothesis.
+  * P-value = 0.0019 means that 0.19& of all possible test statistic values are at least as contradictory to $H_0$ as what we obtained. Thus, the sample appears to be highly contradictory to the null hypothesis.
+* More generally, the smaller the p-value, the more evidence there is in the sample data against the null hypothesis and for the alternative hypothesis.
+* **Decision Rule Based on the P-Value**: select a significance level $\alpha$ (aka the type I error). Then reject $H_0$ if the p-value $\leq \alpha$; do not reject $H_0$ if the p-value is $> \alpha$.
